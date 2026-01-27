@@ -302,10 +302,13 @@
       margin: 0;
     }
 
-    /* Discourse Marker - Simple Blue Text */
+    /* Discourse Marker - Blue Text with Fill */
     .discourse-marker {
       color: #4169E1;
       font-weight: 600;
+      background-color: rgba(65, 105, 225, 0.1);
+      padding: 0.1em 0.2em;
+      border-radius: 0.2em;
     }
 
     /* Navigation Controls - Positioned on Opposite Sides */
@@ -729,32 +732,57 @@
       container.innerHTML = html;
     }
 
-    // Highlight only key introductory expressions
+    // Highlight ALL introductory and transitional expressions with blue fill
     function highlightDiscourseMarkers(text) {
-      // Focused list of introductory/transitional expressions only
       const markers = [
-        // Strong contrast markers
-        'However', 'Nevertheless', 'On the other hand', 'Conversely', 'Despite this',
-        'That said', 'By contrast', 'In contrast',
-        // Addition/emphasis starters
-        'Moreover', 'Furthermore', 'In addition', 'Additionally',
-        'In particular', 'Especially', 'Notably',
-        // Result/consequence
-        'Therefore', 'Thus', 'Consequently', 'As a result', 'Hence',
-        // Example introduction
-        'For instance', 'For example',
-        // Summary/conclusion starters
-        'In conclusion', 'To sum up', 'In summary', 'Overall', 'On balance',
-        'All things considered', 'To conclude',
-        // Sequence
-        'Firstly', 'Secondly', 'Finally', 'To begin with',
-        // Report-specific starters
-        'The main objective of this report', 'The purpose of this report',
-        'This report aims to', 'This report is an evaluation of',
-        // Opinion phrases
-        'In my view', 'In my opinion',
-        // General statements
-        'Generally', 'In general', 'By and large'
+        // Introduction starters
+        'Few people would deny that', 'Nowadays', 'In recent times', 'It is widely recognized that',
+        'There is a growing recognition that', 'Over the past few years', 'It is generally believed that',
+        'It is widely recognised that', 'It is widely acknowledged that', 'These days',
+        'Many people believe that', 'There is an ongoing debate about', 'It is widely believed that',
+        'There is no doubt that', 'It is often argued that', 'In recent years',
+        'It is generally accepted that',
+        
+        // Thesis statements
+        'Therefore', 'Hence', 'Consequently', 'Thus', 'it is vital we analyse',
+        'it is vitally important to consider', 'it is essential that we study',
+        'it becomes necessary to evaluate', 'it is vital to examine', 'it is important to examine',
+        
+        // Advantages/Benefits
+        'The main advantage of', 'One major benefit of', 'A further positive aspect of',
+        'One benefit of', 'Another strong point is that', 'One strong argument in favour of',
+        'A major reason why', 'Supporters of', 'often point out that', 'Advocates of',
+        
+        // Disadvantages/Problems
+        'While there are many advantages', 'Although', 'Despite its positive sides',
+        'The key disadvantage of', 'A major drawback of', 'One clear limitation of',
+        'On the other hand', 'However', 'Critics argue that', 'Those who disagree with',
+        'Detractors of', 'Opponents often point out that', 'it is also true that',
+        
+        // Solutions
+        'One possible solution to this problem would be to',
+        'A practical way to address this issue is to', 'An effective measure could be to',
+        'If such measures were implemented', 'By taking these steps',
+        
+        // Causes/Effects
+        'One of the main causes of', 'A major reason behind', 'The primary factor leading to',
+        'As a result', 'This in turn causes', 'One major effect of',
+        
+        // Opinion expressions
+        'In my opinion', 'From my perspective', 'I firmly believe that',
+        'Personally', 'I am convinced that', 'I strongly agree that',
+        'I tend to believe that', 'There is no doubt in my mind that',
+        
+        // Conclusions
+        'In conclusion', 'To sum up', 'Overall', 'On balance',
+        'As far as I\'m concerned', 'Taking everything into account',
+        
+        // Other transitions
+        'Moreover', 'Furthermore', 'In addition', 'Additionally', 'Nevertheless',
+        'Conversely', 'Despite this', 'By contrast', 'In contrast', 'For instance',
+        'For example', 'In particular', 'Especially', 'Notably', 'Even though',
+        'It seems to me that', 'it seems that', 'Despite all the concerns',
+        'hold the opposite view', 'while others'
       ];
 
       let highlightedText = text;
