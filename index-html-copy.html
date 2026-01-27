@@ -94,7 +94,7 @@
       letter-spacing: 0.1em;
     }
 
-    /* More Button - Contextual Discovery */
+    /* More Button - Top Right Corner */
     .more-btn {
       background: rgba(201, 169, 97, 0.15);
       border: 1px solid rgba(201, 169, 97, 0.3);
@@ -108,14 +108,7 @@
       font-size: 1.25rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0;
-      pointer-events: none;
       position: relative;
-    }
-
-    .global-header:hover .more-btn {
-      opacity: 1;
-      pointer-events: auto;
     }
 
     .more-btn:hover {
@@ -128,7 +121,7 @@
       transform: scale(0.95);
     }
 
-    /* Slide-out Mini Menu */
+    /* Dropdown Menu */
     .more-menu {
       position: absolute;
       top: calc(100% + 0.5rem);
@@ -187,7 +180,6 @@
       flex: 1;
     }
 
-    /* Arrow indicator */
     .more-menu::before {
       content: '';
       position: absolute;
@@ -201,7 +193,7 @@
       transform: rotate(45deg);
     }
 
-    /* ESSAY CONTAINER - Warm Paper Feel */
+    /* ESSAY CONTAINER */
     .essay-container {
       background: linear-gradient(135deg, #f5f1e8 0%, #ede8dc 100%);
       padding: 3.5rem 3rem 2rem;
@@ -265,7 +257,7 @@
     /* Paragraph Section */
     .paragraph-section {
       position: relative;
-      padding: 1.75rem 0.5rem;
+      padding: 1.75rem 0.5rem 3.5rem;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border-bottom: 1px dotted rgba(0, 0, 0, 0.08);
       cursor: default;
@@ -278,7 +270,7 @@
     .paragraph-section:hover {
       background: rgba(201, 169, 97, 0.06);
       border-radius: 0.75rem;
-      padding: 1.75rem 1.5rem;
+      padding: 1.75rem 1.5rem 3.5rem;
       box-shadow: 0 2px 8px rgba(201, 169, 97, 0.15);
     }
 
@@ -306,73 +298,58 @@
       margin: 0;
     }
 
-    /* Discourse Marker Highlighting */
+    /* Discourse Marker - Simple Blue Text */
     .discourse-marker {
-      background: rgba(100, 149, 237, 0.2);
-      padding: 0.15rem 0.4rem;
-      border-radius: 0.25rem;
+      color: #4169E1;
       font-weight: 600;
     }
 
-    /* Navigation Controls - Hidden by Default */
+    /* Navigation Controls - Always Visible Below Text on Mobile */
     .paragraph-nav {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .paragraph-section:hover .paragraph-nav {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .paragraph-nav.nav-left {
-      left: -3.5rem;
-    }
-
-    .paragraph-nav.nav-right {
-      right: -3.5rem;
-    }
-
-    /* Navigation Buttons */
-    .nav-btn {
-      width: 36px;
-      height: 36px;
-      background: rgba(201, 169, 97, 0.15);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(201, 169, 97, 0.3);
-      border-radius: 50%;
+      bottom: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #C9A961;
-      font-size: 1.125rem;
+      gap: 1rem;
+    }
+
+    /* Navigation Buttons - Pill Style Like Footer */
+    .nav-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.5rem 1.25rem;
+      border: 2px solid transparent;
+      border-radius: 2rem;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: linear-gradient(135deg, #9a9186 0%, #c9a961 100%);
+      color: #2a2420;
+      box-shadow: 0 4px 15px rgba(154, 145, 134, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
-    .nav-btn:hover {
-      background: rgba(201, 169, 97, 0.25);
-      border-color: rgba(201, 169, 97, 0.5);
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+    .nav-btn:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.05);
+      filter: brightness(1.1);
+      box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
     }
 
-    .nav-btn:active {
-      transform: scale(0.95);
+    .nav-btn:active:not(:disabled) {
+      transform: translateY(-1px) scale(1.02);
     }
 
     .nav-btn:disabled {
       opacity: 0.3;
       cursor: not-allowed;
-      transform: scale(1);
+      transform: none;
     }
 
     /* Sample Counter */
@@ -384,17 +361,10 @@
       font-size: 0.6875rem;
       font-weight: 600;
       color: rgba(0, 0, 0, 0.35);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
       letter-spacing: 0.05em;
     }
 
-    .paragraph-section:hover .sample-counter {
-      opacity: 1;
-    }
-
-    /* NAVIGATION PILLS - At Bottom of Container */
+    /* NAVIGATION PILLS */
     .nav-pills {
       display: flex;
       justify-content: center;
@@ -418,7 +388,6 @@
       position: relative;
       overflow: hidden;
       animation: float 3s ease-in-out infinite;
-      /* Unified greyish-gold gradient for all pills */
       background: linear-gradient(135deg, #9a9186 0%, #c9a961 100%);
       color: #2a2420;
       box-shadow: 0 4px 15px rgba(154, 145, 134, 0.25);
@@ -526,27 +495,12 @@
         text-indent: 1.5rem;
       }
 
+      .paragraph-section {
+        padding: 1.5rem 0.5rem 3.5rem;
+      }
+
       .paragraph-section:hover {
-        padding: 1.75rem 1rem;
-      }
-
-      /* Show nav buttons below paragraph on mobile */
-      .paragraph-nav.nav-left {
-        left: 1rem;
-        top: auto;
-        bottom: 0.5rem;
-        transform: none;
-      }
-
-      .paragraph-nav.nav-right {
-        right: 1rem;
-        top: auto;
-        bottom: 0.5rem;
-        transform: none;
-      }
-
-      .paragraph-section:hover .paragraph-nav {
-        opacity: 1;
+        padding: 1.5rem 1rem 3.5rem;
       }
 
       .nav-pills {
@@ -562,14 +516,6 @@
 
     /* Tablet */
     @media (max-width: 1024px) and (min-width: 769px) {
-      .paragraph-nav.nav-left {
-        left: -2.5rem;
-      }
-
-      .paragraph-nav.nav-right {
-        right: -2.5rem;
-      }
-
       .poster-text {
         font-size: 2.75rem;
       }
@@ -587,7 +533,7 @@
           <span class="brand-subtitle" id="brandSubtitle">Writing Models</span>
         </div>
         
-        <!-- More Button with Slide-out Menu -->
+        <!-- More Button with Dropdown Menu -->
         <div style="position: relative;">
           <button class="more-btn" id="moreBtn" onclick="toggleMoreMenu(event)">⋯</button>
           
@@ -634,7 +580,7 @@
     // State management
     let currentType = null;
     let currentData = null;
-    let paragraphIndices = []; // Track which sample is shown for each paragraph
+    let paragraphIndices = [];
 
     // Data paths
     const DATA_PATHS = {
@@ -681,7 +627,6 @@
 
         currentData = data;
         
-        // Initialize paragraph indices (all start at 0)
         if (data.samples && data.samples.length > 0) {
           const numParagraphs = data.samples[0].paragraphs.length;
           paragraphIndices = new Array(numParagraphs).fill(0);
@@ -723,18 +668,16 @@
       
       let html = '';
       
-      // Add title if available
       if (currentData.title) {
         html += `<div class="essay-title">${currentData.title}</div>`;
       }
 
-      // Render each paragraph with independent navigation
+      // Render each paragraph with navigation below
       firstSample.paragraphs.forEach((para, paraIndex) => {
         const currentSampleIndex = paragraphIndices[paraIndex];
         const currentPara = currentData.samples[currentSampleIndex].paragraphs[paraIndex];
         const totalSamples = currentData.samples.length;
 
-        // Highlight discourse markers
         const highlightedText = highlightDiscourseMarkers(currentPara.text);
 
         html += `
@@ -742,28 +685,22 @@
             
             ${currentPara.label ? `<div class="section-heading">${currentPara.label}</div>` : ''}
 
-            <!-- Left Navigation -->
-            <div class="paragraph-nav nav-left">
+            <p class="paragraph-text">${highlightedText}</p>
+
+            <!-- Navigation Below Text -->
+            <div class="paragraph-nav">
               <button class="nav-btn" 
                       onclick="navigateParagraph(${paraIndex}, -1)"
                       ${currentSampleIndex === 0 ? 'disabled' : ''}>
-                ←
+                ← PREV
               </button>
-            </div>
-
-            <!-- Paragraph Text -->
-            <p class="paragraph-text">${highlightedText}</p>
-
-            <!-- Right Navigation -->
-            <div class="paragraph-nav nav-right">
               <button class="nav-btn" 
                       onclick="navigateParagraph(${paraIndex}, 1)"
                       ${currentSampleIndex === totalSamples - 1 ? 'disabled' : ''}>
-                →
+                NEXT →
               </button>
             </div>
 
-            <!-- Sample Counter -->
             <div class="sample-counter">${currentSampleIndex + 1}/${totalSamples}</div>
 
           </div>
@@ -783,93 +720,40 @@
       container.innerHTML = html;
     }
 
-    // Highlight discourse markers in text
+    // Highlight only key introductory expressions
     function highlightDiscourseMarkers(text) {
+      // Focused list of introductory/transitional expressions only
       const markers = [
-        // Contrast/Opposition
-        'However', 'Nevertheless', 'On the other hand', 'Conversely', 'Despite these positives',
-        'That said', 'Although', 'Though', 'While', 'Whereas', 'By far the worst',
-        // Addition/Emphasis
-        'Moreover', 'Furthermore', 'In addition', 'Additionally', 'Also', 'As well as',
-        'In particular', 'Especially', 'Similarly', 'Likewise',
-        // Result/Consequence
+        // Strong contrast markers
+        'However', 'Nevertheless', 'On the other hand', 'Conversely', 'Despite this',
+        'That said', 'By contrast', 'In contrast',
+        // Addition/emphasis starters
+        'Moreover', 'Furthermore', 'In addition', 'Additionally',
+        'In particular', 'Especially', 'Notably',
+        // Result/consequence
         'Therefore', 'Thus', 'Consequently', 'As a result', 'Hence',
-        // Example/Illustration
-        'For instance', 'For example', 'Such as',
-        // Summary/Conclusion
+        // Example introduction
+        'For instance', 'For example',
+        // Summary/conclusion starters
         'In conclusion', 'To sum up', 'In summary', 'Overall', 'On balance',
-        'All things considered', 'Taking everything into account', 'To conclude',
-        'It can be concluded that', 'It seems clear that',
-        // Purpose/Reason
-        'In order to', 'So that', 'With regard to', 'Concerning', 'Regarding',
+        'All things considered', 'To conclude',
         // Sequence
-        'Firstly', 'Secondly', 'Finally', 'Subsequently', 'Then',
-        // Condition
-        'If', 'Unless', 'Provided that', 'As long as', 'If we were to',
-        // Recommendation phrases
-        'I would recommend', 'I would suggest', 'I would strongly recommend',
-        'I would strongly advise', 'It would be advisable', 'It is essential that',
-        'one key recommendation would be', 'To enhance', 'To address', 'To reduce',
-        'To improve', 'I would advise',
+        'Firstly', 'Secondly', 'Finally', 'To begin with',
+        // Report-specific starters
+        'The main objective of this report', 'The purpose of this report',
+        'This report aims to', 'This report is an evaluation of',
         // Opinion phrases
         'In my view', 'In my opinion',
-        // Generalizations
-        'Generally', 'In general', 'By and large',
-        'There is a broad consensus', 'It is generally agreed', 'The majority of',
-        'There is widespread agreement',
-        // Report-specific intro phrases
-        'The main objective of this report', 'The purpose of this report',
-        'This report aims to', 'This report seeks to', 'The aim of this report',
-        'This report is an evaluation of',
-        // Data source phrases
-        'The information presented in this report', 'The findings in this report',
-        'Data was gathered through', 'Data was obtained through', 'Evidence was gathered through',
-        'Information was obtained through',
-        // Agreement/consensus phrases
-        'most participants felt', 'most respondents', 'many visitors referred to',
-        'many respondents', 'Students generally appreciated', 'Passengers generally praised',
-        'The project has been received', 'Students expressed satisfaction',
-        'were particularly commended', 'was particularly beneficial',
-        // Criticism/complaint phrases
-        'the most significant complaint', 'the main criticism', 'the main issue raised',
-        'were identified as inadequate', 'were considered too high', 'has limited productivity',
-        'emerged as the most serious concern', 'was seen as too restrictive',
-        // Best/worst expressions
-        'the best part of', 'The highlight of', 'proved to be extremely popular',
-        'received excellent feedback', 'was widely regarded as',
-        // Frequency adverbs
-        'often feel', 'frequently mentioned', 'widely regarded', 'enthusiastically',
-        // Passive constructions (key for formal writing)
-        'was collected through', 'are drawn from', 'was gathered through',
-        'were highlighted as', 'has been well-received', 'have been successful',
-        'have been well-received', 'were especially appreciated',
-        // Conditionals for recommendations
-        'would be', 'would greatly benefit', 'would resolve', 'would ensure',
-        'would make it more', 'would better serve', 'would be more suitable',
-        'would maximize', 'would significantly improve',
-        // Quantifiers
-        'a wide range of', 'a broad consensus', 'approximately', 'several',
-        // Time expressions
-        'during peak hours', 'over a two-week period', 'six months ago',
-        'over one month', 'During lunch breaks',
-        // Evaluation language
-        'given that', 'considering that', 'as customers often feel',
-        // Conclusion starters
-        'it can be concluded', 'it seems clear', 'Taking everything into account'
+        // General statements
+        'Generally', 'In general', 'By and large'
       ];
 
       let highlightedText = text;
-
-      // Sort by length (longest first) to avoid partial matches
       markers.sort((a, b) => b.length - a.length);
 
       markers.forEach(marker => {
-        // Create regex that matches the marker (case-insensitive, with word boundaries)
         const regex = new RegExp(`\\b(${marker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\b`, 'gi');
-        
-        // Only replace if not already wrapped in a span
         highlightedText = highlightedText.replace(regex, (match) => {
-          // Check if already inside a span tag
           if (!highlightedText.includes(`<span class="discourse-marker">${match}</span>`)) {
             return `<span class="discourse-marker">${match}</span>`;
           }
@@ -880,49 +764,18 @@
       return highlightedText;
     }
 
-    // Navigate to different sample for a specific paragraph
+    // Navigate paragraph
     function navigateParagraph(paraIndex, direction) {
       const totalSamples = currentData.samples.length;
       const newIndex = paragraphIndices[paraIndex] + direction;
 
-      // Validate bounds
       if (newIndex < 0 || newIndex >= totalSamples) {
         return;
       }
 
-      // Update the index for this paragraph
       paragraphIndices[paraIndex] = newIndex;
-
-      // Re-render
       renderWriting();
     }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (!currentData) return;
-
-      // Find the currently focused paragraph (if any)
-      const hoveredSection = document.querySelector('.paragraph-section:hover');
-      if (hoveredSection) {
-        const paraIndex = parseInt(hoveredSection.dataset.paraIndex);
-        
-        if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          navigateParagraph(paraIndex, -1);
-        } else if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          navigateParagraph(paraIndex, 1);
-        }
-      }
-      
-      // Close menu on Escape
-      if (e.key === 'Escape') {
-        const menu = document.getElementById('moreMenu');
-        if (menu && menu.classList.contains('active')) {
-          menu.classList.remove('active');
-        }
-      }
-    });
 
     // More Menu Functions
     function toggleMoreMenu(event) {
@@ -934,14 +787,11 @@
     function handleMenuAction(action) {
       event.preventDefault();
       
-      // Close menu
       const menu = document.getElementById('moreMenu');
       menu.classList.remove('active');
       
-      // Handle different actions based on current writing type
-      const writingType = currentType || 'essays'; // Default to essays if none selected
+      const writingType = currentType || 'essays';
       
-      // Define paths for each writing type
       const paths = {
         essays: {
           questions: '../skills/writing/essays/essay-question-selector.html',
@@ -969,14 +819,11 @@
         }
       };
       
-      // Get the appropriate path
       const path = paths[writingType]?.[action];
       
       if (path) {
-        // Navigate to the page
         window.location.href = path;
       } else {
-        // Fallback - show alert
         const labels = {
           questions: 'Browse Questions',
           plans: 'View Plans',
@@ -995,6 +842,31 @@
       
       if (menu && menu.classList.contains('active')) {
         if (!menu.contains(e.target) && !moreBtn.contains(e.target)) {
+          menu.classList.remove('active');
+        }
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!currentData) return;
+
+      const hoveredSection = document.querySelector('.paragraph-section:hover');
+      if (hoveredSection) {
+        const paraIndex = parseInt(hoveredSection.dataset.paraIndex);
+        
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          navigateParagraph(paraIndex, -1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          navigateParagraph(paraIndex, 1);
+        }
+      }
+      
+      if (e.key === 'Escape') {
+        const menu = document.getElementById('moreMenu');
+        if (menu && menu.classList.contains('active')) {
           menu.classList.remove('active');
         }
       }
