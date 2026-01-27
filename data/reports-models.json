@@ -1,0 +1,253 @@
+{
+  "title": "B2 First - Formal Report Writing",
+  "samples": [
+    {
+      "id": "sample1",
+      "topic": "Shopping Centre Assessment",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "The main objective of this report is to assess the new shopping centre in the city centre. The information presented in this report was collected through a questionnaire conducted among customers."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "There is a broad consensus that the shopping centre offers a wide range of shops, given that it is relatively small. Moreover, many visitors referred to the food court as the best part of the centre."
+        },
+        {
+          "type": "areas_of_concern",
+          "label": "Areas of Concern",
+          "text": "However, by far the worst aspect of the shopping centre is the lack of seating, as customers often feel tired. In addition, overcrowding during peak hours was frequently mentioned."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "In order to improve customer satisfaction, I would strongly recommend increasing seating areas. Furthermore, it is essential that rest zones are clearly signposted."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "Taking everything into account, it seems clear that the shopping centre is popular, although certain improvements are required."
+        }
+      ]
+    },
+    {
+      "id": "sample2",
+      "topic": "School Trip Evaluation",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "This report is an evaluation of a recent school trip to London. The findings in this report are drawn from interviews and feedback obtained during the visit."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "It is generally agreed that the trip was well organised, considering that it involved many students. As a result, most participants felt relaxed and informed."
+        },
+        {
+          "type": "positive_aspects",
+          "label": "Positive Aspects",
+          "text": "The highlight of the trip was the guided tour. In particular, students appreciated the clear explanations provided."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "If we were to improve future trips, one key recommendation would be to allow more free time, so that students can explore independently."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "In summary, it can be concluded that the trip was both educational and enjoyable."
+        }
+      ]
+    },
+    {
+      "id": "sample3",
+      "topic": "Library Services Review",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "The purpose of this report is to evaluate the new library facilities recently opened in our town. Data was gathered through interviews with regular library users over a two-week period."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "The majority of respondents praised the extensive book collection and modern technology resources. Additionally, the quiet study areas were highlighted as particularly beneficial for students."
+        },
+        {
+          "type": "areas_of_concern",
+          "label": "Areas of Concern",
+          "text": "Nevertheless, the most significant complaint concerned the limited opening hours, especially on weekends. Furthermore, several users mentioned that the computer booking system is confusing."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "To enhance user satisfaction, I would recommend extending weekend opening hours. Moreover, it would be advisable to provide clearer instructions for the booking system."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "On balance, the library has been well-received, though addressing these concerns would significantly improve the service."
+        }
+      ]
+    },
+    {
+      "id": "sample4",
+      "topic": "Sports Centre Evaluation",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "This report aims to examine the recently renovated sports centre in the local community. The findings are based on feedback forms completed by approximately 150 members."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "Overall, members expressed satisfaction with the new equipment and improved changing facilities. In particular, the swimming pool area received excellent feedback for its cleanliness."
+        },
+        {
+          "type": "negative_aspects",
+          "label": "Negative Aspects",
+          "text": "On the other hand, parking facilities were identified as inadequate, causing frustration during peak times. Also, the membership fees were considered too high by many respondents."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "With regard to parking, I would suggest creating additional spaces or promoting public transport options. Concerning fees, offering family discounts could improve accessibility."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "In conclusion, while the renovations have been successful, addressing parking and pricing issues would maximize member satisfaction."
+        }
+      ]
+    },
+    {
+      "id": "sample5",
+      "topic": "School Cafeteria Assessment",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "The aim of this report is to assess the school cafeteria following recent changes to the menu. Information was obtained through a survey of 200 students across different year groups."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "Students generally appreciated the introduction of healthier meal options and vegetarian choices. The salad bar, in particular, proved to be extremely popular among older students."
+        },
+        {
+          "type": "concerns",
+          "label": "Concerns",
+          "text": "However, the main criticism focused on long queuing times, especially during lunch breaks. Additionally, several students complained about limited seating capacity."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "To reduce queuing times, I would recommend introducing a staggered lunch schedule. It would also be beneficial to add more seating in the outdoor area."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "Overall, the menu changes have been well-received, but improvements to queuing and seating would enhance the dining experience."
+        }
+      ]
+    },
+    {
+      "id": "sample6",
+      "topic": "Youth Club Facilities",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "The objective of this report is to evaluate the new youth club opened in the community centre. The data was collected through group discussions with regular attendees."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "There is widespread agreement that the club provides a safe and welcoming environment for young people. The games room and music facilities were particularly commended by participants."
+        },
+        {
+          "type": "issues_raised",
+          "label": "Issues Raised",
+          "text": "Conversely, the main issue raised was the lack of activities for older teenagers. Moreover, the club's early closing time at 8pm was seen as too restrictive."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "In my view, introducing age-specific programmes would better serve all members. Regarding opening hours, extending to 9pm would be more suitable for teenagers."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "To sum up, the youth club has great potential, but implementing these suggestions would make it more inclusive and accessible."
+        }
+      ]
+    },
+    {
+      "id": "sample7",
+      "topic": "Public Transport Service",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "This report seeks to evaluate the new bus service connecting the town centre with residential areas. Evidence was gathered through passenger surveys conducted over one month."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "Passengers generally praised the frequency of buses and the cleanliness of vehicles. Furthermore, the introduction of contactless payment was widely regarded as convenient."
+        },
+        {
+          "type": "problems_identified",
+          "label": "Problems Identified",
+          "text": "Despite these positives, unreliable timekeeping emerged as the most serious concern. In addition, limited service on Sundays was criticized by many users."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "To address timing issues, I would strongly advise implementing real-time tracking displays at stops. Expanding Sunday services would also greatly benefit weekend travellers."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "In summary, while the service shows promise, reliability improvements and extended weekend operations are essential."
+        }
+      ]
+    },
+    {
+      "id": "sample8",
+      "topic": "Community Garden Project",
+      "paragraphs": [
+        {
+          "type": "introduction",
+          "label": "Introduction",
+          "text": "The purpose of this report is to review the community garden project established six months ago. Data was obtained through interviews with volunteers and local residents."
+        },
+        {
+          "type": "general_overview",
+          "label": "General Overview",
+          "text": "The project has been received enthusiastically, with participants valuing the opportunity to grow fresh produce. The educational workshops on sustainable gardening were especially appreciated."
+        },
+        {
+          "type": "challenges",
+          "label": "Challenges",
+          "text": "That said, the shortage of tools and equipment has limited productivity. Similarly, the lack of water access during summer months created significant challenges."
+        },
+        {
+          "type": "recommendation",
+          "label": "Recommendation",
+          "text": "I would recommend securing funding for essential equipment and tool storage. Installing a rainwater collection system would resolve the water shortage issue effectively."
+        },
+        {
+          "type": "conclusion",
+          "label": "Conclusion",
+          "text": "All things considered, the garden project has succeeded in bringing the community together, and these improvements would ensure its long-term sustainability."
+        }
+      ]
+    }
+  ]
+}
