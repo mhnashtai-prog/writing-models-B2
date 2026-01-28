@@ -6,7 +6,7 @@
       "paragraphs": [
         {
           "label": "Opening",
-          "text": "Dear/Hi Tom, It was great to get your message! I'm so happy to hear you're planning to visit! That's wonderful news — I can't wait to see you!"
+          "text": "Dear Tom, It was great to get your message! I'm so happy to hear you're planning to visit! That's wonderful news — I can't wait to see you!"
         },
         {
           "label": "Main Content",
@@ -14,7 +14,7 @@
         },
         {
           "label": "Closing",
-          "text": "Can't wait to catch up! Write soon and tell me your exact dates. Really looking forward to seeing you! Take care and see you soon! Lots of love, / Best, / Cheers,"
+          "text": "Can't wait to catch up! Write soon and tell me your exact dates. Really looking forward to seeing you! Take care and see you soon! Lots of love, Sarah"
         }
       ]
     },
@@ -23,7 +23,7 @@
       "paragraphs": [
         {
           "label": "Opening",
-          "text": "Dear/Sue Sir, Congratulations on your news! That's amazing! I was so happy to hear about your offer! Wow, that's brilliant — you must be really excited!"
+          "text": "Dear Sue, Congratulations on your news! That's amazing! I was so happy to hear about your offer! Wow, that's brilliant — you must be really excited!"
         },
         {
           "label": "Main Content",
@@ -31,7 +31,7 @@
         },
         {
           "label": "Closing",
-          "text": "Let me know what you decide! I can't wait to hear how it goes. Best of luck — I'm sure you'll make the right choice! Keep in touch and tell me everything! Take care, / Love, / All the best,"
+          "text": "Let me know what you decide! I can't wait to hear how it goes. Best of luck — I'm sure you'll make the right choice! Keep in touch and tell me everything! Take care, Mark"
         }
       ]
     },
@@ -48,7 +48,7 @@
         },
         {
           "label": "Closing",
-          "text": "Hope you can make it! Let me know if you're free that evening. Looking forward to hearing from you soon! It would be fantastic to see you! Speak soon, / Cheers, / Best wishes,"
+          "text": "Hope you can make it! Let me know if you're free that evening. Looking forward to hearing from you soon! It would be fantastic to see you! Speak soon, Jamie"
         }
       ]
     },
@@ -65,7 +65,7 @@
         },
         {
           "label": "Closing",
-          "text": "Write back soon and tell me your news! I'd love to catch up properly sometime. Maybe we could meet for coffee next month? Take care of yourself! All my love, / Warmest regards, / Bye for now,"
+          "text": "Write back soon and tell me your news! I'd love to catch up properly sometime. Maybe we could meet for coffee next month? Take care of yourself! All my love, Rachel"
         }
       ]
     },
@@ -82,7 +82,7 @@
         },
         {
           "label": "Closing",
-          "text": "Hope you're not too upset with me! Let me know when you're available. Can't wait to celebrate with you properly! Sorry again for everything! Lots of hugs, / Your friend, / Talk soon,"
+          "text": "Hope you're not too upset with me! Let me know when you're available. Can't wait to celebrate with you properly! Sorry again for everything! Lots of hugs, Chris"
         }
       ]
     },
@@ -91,7 +91,7 @@
       "paragraphs": [
         {
           "label": "Opening",
-          "text": "Dear Sir, I am writing with reference to your advertisement for the position of Marketing Manager. I would like to apply for the role of Digital Marketing Specialist recently advertised in The Guardian. I am interested in applying for the post of Sales Executive."
+          "text": "Dear Sir or Madam, I am writing with reference to your advertisement for the position of Marketing Manager. I would like to apply for the role of Digital Marketing Specialist recently advertised in The Guardian. I am interested in applying for the post of Sales Executive."
         },
         {
           "label": "Main Content",
@@ -99,7 +99,7 @@
         },
         {
           "label": "Closing",
-          "text": "I very much hope you will consider my application. I would be delighted to attend an interview at your convenience. I look forward to hearing from you. (Yours faithfully,)"
+          "text": "I very much hope you will consider my application. I would be delighted to attend an interview at your convenience. I look forward to hearing from you. Yours faithfully, James Anderson"
         }
       ]
     },
@@ -108,7 +108,7 @@
       "paragraphs": [
         {
           "label": "Opening",
-          "text": "Dear Sir, I am writing to enquire about your English language courses. I would like to request further information regarding the accommodation options available. I saw your advertisement for summer programs and would like to ask several questions."
+          "text": "Dear Sir or Madam, I am writing to enquire about your English language courses. I would like to request further information regarding the accommodation options available. I saw your advertisement for summer programs and would like to ask several questions."
         },
         {
           "label": "Main Content",
@@ -116,7 +116,7 @@
         },
         {
           "label": "Closing",
-          "text": "I would be grateful if you could reply at your earliest convenience. I look forward to hearing from you soon. Thank you very much for your assistance. (Yours faithfully)"
+          "text": "I would be grateful if you could reply at your earliest convenience. I look forward to hearing from you soon. Thank you very much for your assistance. Yours faithfully, Maria Santos"
         }
       ]
     },
@@ -125,7 +125,7 @@
       "paragraphs": [
         {
           "label": "Opening",
-          "text": "Dear Sir/Madam, I am writing to complain about the service I received at your restaurant last Saturday. I am writing to express my dissatisfaction with the laptop I purchased from your store. I wish to make a formal complaint regarding my recent hotel stay."
+          "text": "Dear Sir or Madam, I am writing to complain about the service I received at your restaurant last Saturday. I am writing to express my dissatisfaction with the laptop I purchased from your store. I wish to make a formal complaint regarding my recent hotel stay."
         },
         {
           "label": "Main Content",
@@ -133,7 +133,7 @@
         },
         {
           "label": "Closing",
-          "text": "I expect to receive a full refund or at minimum a written apology. I look forward to your prompt response to this matter. Unless I hear from you within seven days, I will take further action. (Yours faithfully)"
+          "text": "I expect to receive a full refund or at minimum a written apology. I look forward to your prompt response to this matter. Unless I hear from you within seven days, I will take further action. Yours faithfully, Robert Williams"
         }
       ]
     },
@@ -150,7 +150,7 @@
         },
         {
           "label": "Closing",
-          "text": "I would be most grateful if you could send me a prospectus. I look forward to receiving further details at your earliest convenience. Thank you in advance for your help. (Yours sincerely)"
+          "text": "I would be most grateful if you could send me a prospectus. I look forward to receiving further details at your earliest convenience. Thank you in advance for your help. Yours sincerely, David Chen"
         }
       ]
     },
@@ -167,7 +167,7 @@
         },
         {
           "label": "Closing",
-          "text": "I would welcome the opportunity to discuss my application in more detail. I am available for an interview at any time that suits you. Thank you for considering my application. (Yours sincerely)"
+          "text": "I would welcome the opportunity to discuss my application in more detail. I am available for an interview at any time that suits you. Thank you for considering my application. Yours sincerely, Laura Martinez"
         }
       ]
     },
@@ -184,7 +184,7 @@
         },
         {
           "label": "Closing",
-          "text": "Let me know what dates work for you! Can't wait to show you around the city! This is going to be brilliant fun! Stay in touch! Hugs, / See you soon, / Your mate,"
+          "text": "Let me know what dates work for you! Can't wait to show you around the city! This is going to be brilliant fun! Stay in touch! See you soon, Alex"
         }
       ]
     },
@@ -201,7 +201,7 @@
         },
         {
           "label": "Closing",
-          "text": "Congratulations once again to you both! Can't wait to celebrate with you properly! Give my love to Mark! Speak to you very soon! Much love, / Hugs and kisses, / Your excited friend,"
+          "text": "Congratulations once again to you both! Can't wait to celebrate with you properly! Give my love to Mark! Speak to you very soon! Much love, Sophie"
         }
       ]
     },
@@ -218,7 +218,7 @@
         },
         {
           "label": "Closing",
-          "text": "I'd really appreciate your thoughts on this! Let me know when you have time for a chat. Thanks in advance for any wisdom you can share! You're a star! Catch up soon, / Your confused friend, / Cheers mate,"
+          "text": "I'd really appreciate your thoughts on this! Let me know when you have time for a chat. Thanks in advance for any wisdom you can share! You're a star! Catch up soon, Dan"
         }
       ]
     },
@@ -235,7 +235,7 @@
         },
         {
           "label": "Closing",
-          "text": "I would be deeply grateful for your support with this application. Thank you very much for considering my request. I look forward to hearing from you. (Yours sincerely)"
+          "text": "I would be deeply grateful for your support with this application. Thank you very much for considering my request. I look forward to hearing from you. Yours sincerely, Thomas Mitchell"
         }
       ]
     },
@@ -252,7 +252,7 @@
         },
         {
           "label": "Closing",
-          "text": "I would be grateful if you could send me a quotation for this stay. I look forward to your reply at your earliest convenience. Thank you for your assistance with this matter. (Yours faithfully)"
+          "text": "I would be grateful if you could send me a quotation for this stay. I look forward to your reply at your earliest convenience. Thank you for your assistance with this matter. Yours faithfully, Jennifer Brown"
         }
       ]
     },
@@ -269,7 +269,7 @@
         },
         {
           "label": "Closing",
-          "text": "I'll bring you some souvenirs when we meet up! Let's arrange a coffee soon so I can tell you everything! Missing you loads! Can't wait to see you! Safe travels, / Your jet-lagged friend, / Big hugs,"
+          "text": "I'll bring you some souvenirs when we meet up! Let's arrange a coffee soon so I can tell you everything! Missing you loads! Can't wait to see you! Big hugs, Mike"
         }
       ]
     },
@@ -286,7 +286,7 @@
         },
         {
           "label": "Closing",
-          "text": "I am very much looking forward to joining your team and contributing to the company's success. Thank you once again for this wonderful opportunity. Please do not hesitate to contact me if you need any further information. (Yours sincerely)"
+          "text": "I am very much looking forward to joining your team and contributing to the company's success. Thank you once again for this wonderful opportunity. Please do not hesitate to contact me if you need any further information. Yours sincerely, Sarah Johnson"
         }
       ]
     },
@@ -303,7 +303,7 @@
         },
         {
           "label": "Closing",
-          "text": "Hope you have a fantastic time and I'll be thinking of you! Let me know how it goes! Sorry again, / Lots of love, / Your apologetic friend,"
+          "text": "Hope you have a fantastic time and I'll be thinking of you! Let me know how it goes! Sorry again, Your apologetic friend, Ben"
         }
       ]
     },
@@ -320,7 +320,7 @@
         },
         {
           "label": "Closing",
-          "text": "I look forward to participating in this prestigious event. Thank you for organizing what promises to be an excellent conference. Please contact me if you require any additional information. (Yours sincerely)"
+          "text": "I look forward to participating in this prestigious event. Thank you for organizing what promises to be an excellent conference. Please contact me if you require any additional information. Yours sincerely, Dr. Michael Foster"
         }
       ]
     },
@@ -337,7 +337,7 @@
         },
         {
           "label": "Closing",
-          "text": "This is going to be so much fun! Get back to me when you can about the dates. Can't wait to spend quality time with everyone! Excited already! Chat soon, / Love, / Your enthusiastic friend,"
+          "text": "This is going to be so much fun! Get back to me when you can about the dates. Can't wait to spend quality time with everyone! Excited already! Chat soon, Hannah"
         }
       ]
     }
