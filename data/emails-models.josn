@@ -8,7 +8,735 @@
       "paragraphs": [
         {
           "label": "Opening",
+          "text": "Dear/Hi Tom{
+  "title": "Email Writing Models",
+  "samples": [
+    {
+      "type": "Informal",
+      "purpose": "Reacting to news and making plans",
+      "paragraphs": [
+        {
+          "label": "Opening",
           "text": "Dear/Hi Tom, It was great to get your message! I'm so happy to hear you're planning to visit! That's wonderful news — I can't wait to see you!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Thanks for writing — I'm really looking forward to your trip! You can't imagine how pleased I am that you're coming! There's so much to see and do here. You should definitely visit the museum. We could go to the new cafe downtown."
+        },
+        {
+          "label": "Closing",
+          "text": "Can't wait to catch up! Write soon and tell me your exact dates. Really looking forward to seeing you! Take care and see you soon! Lots of love, / Best, / Cheers,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Giving advice to a friend",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear/Sue Sir, Congratulations on your news! That's amazing! I was so happy to hear about your offer! Wow, that's brilliant — you must be really excited!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Thanks for your email — I'm so glad you told me! It sounds like a great opportunity! If I were you, I'd definitely accept it. You ought to think about the location before deciding. From my own experience, this type of role is really worth it."
+        },
+        {
+          "label": "Closing",
+          "text": "Let me know what you decide! I can't wait to hear how it goes. Best of luck — I'm sure you'll make the right choice! Keep in touch and tell me everything! Take care, / Love, / All the best,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Inviting a friend",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi there Sarah, Hope you're doing well! I've been meaning to write to you for ages! How have you been lately? I've got some exciting news to share with you!"
+        },
+        {
+          "label": "Main Content",
+          "text": "I'm having a party next Saturday and I'd love you to come! It's going to be at my place around 7pm. There'll be great food and music. I think you'd really enjoy meeting everyone. Why don't we arrange to meet beforehand? I can pick you up if you like."
+        },
+        {
+          "label": "Closing",
+          "text": "Hope you can make it! Let me know if you're free that evening. Looking forward to hearing from you soon! It would be fantastic to see you! Speak soon, / Cheers, / Best wishes,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Thanking and updating",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Alex, Thanks so much for your last email! It was lovely to hear from you after all this time! I really appreciated your kind words and support during that difficult period!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Things have been going much better recently, I'm happy to say! I finally got that job I was hoping for. The best thing about it is the flexible hours. I've also started learning Spanish, which is challenging but fun. You'd be proud of how much progress I've made!"
+        },
+        {
+          "label": "Closing",
+          "text": "Write back soon and tell me your news! I'd love to catch up properly sometime. Maybe we could meet for coffee next month? Take care of yourself! All my love, / Warmest regards, / Bye for now,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Apologizing and explaining",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Jamie, I'm so sorry I haven't written sooner! I feel terrible about missing your birthday celebration last week! Please forgive me for not being in touch — things have been absolutely crazy here!"
+        },
+        {
+          "label": "Main Content",
+          "text": "The reason I couldn't make it was that I had a family emergency. My grandmother suddenly fell ill and I had to rush to the hospital. I hope you understand why I couldn't let you know earlier. I'd really like to make it up to you somehow. Perhaps we could go out for dinner next weekend?"
+        },
+        {
+          "label": "Closing",
+          "text": "Hope you're not too upset with me! Let me know when you're available. Can't wait to celebrate with you properly! Sorry again for everything! Lots of hugs, / Your friend, / Talk soon,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Job application",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir, I am writing with reference to your advertisement for the position of Marketing Manager. I would like to apply for the role of Digital Marketing Specialist recently advertised in The Guardian. I am interested in applying for the post of Sales Executive."
+        },
+        {
+          "label": "Main Content",
+          "text": "During the past few years I have been employed as a Marketing Coordinator at TechCorp. My duties have included managing social media campaigns, which has helped me develop strong analytical skills. I have experience working with international clients and consider myself as a creative problem solver. I believe I would be a suitable candidate because of my proven track record. I am particularly interested in this position as it would allow me to utilize my digital expertise. Furthermore, I am a motivated and reliable person who thrives in challenging environments."
+        },
+        {
+          "label": "Closing",
+          "text": "I very much hope you will consider my application. I would be delighted to attend an interview at your convenience. I look forward to hearing from you. (Yours faithfully,)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Requesting information",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir, I am writing to enquire about your English language courses. I would like to request further information regarding the accommodation options available. I saw your advertisement for summer programs and would like to ask several questions."
+        },
+        {
+          "label": "Main Content",
+          "text": "Could you please tell me whether courses are available in July? I would also like to know if beginner-level classes are offered. Would it be possible to receive details about the course fees and payment methods? I am planning to stay for three weeks, so I would appreciate information on long-term accommodation. As I will be travelling with my family, I would like to know whether family rooms are available."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be grateful if you could reply at your earliest convenience. I look forward to hearing from you soon. Thank you very much for your assistance. (Yours faithfully)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Making a complaint",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir/Madam, I am writing to complain about the service I received at your restaurant last Saturday. I am writing to express my dissatisfaction with the laptop I purchased from your store. I wish to make a formal complaint regarding my recent hotel stay."
+        },
+        {
+          "label": "Main Content",
+          "text": "The main problem was that the food took over two hours to arrive. Furthermore, when it finally came, the meal was cold and poorly prepared. The staff were unhelpful and showed little concern for our complaints. I find this completely unacceptable, especially given the high prices charged. I feel I am entitled to compensation for this disappointing experience. I would appreciate it if you could look into this matter urgently."
+        },
+        {
+          "label": "Closing",
+          "text": "I expect to receive a full refund or at minimum a written apology. I look forward to your prompt response to this matter. Unless I hear from you within seven days, I will take further action. (Yours faithfully)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Requesting information about a course",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir or Madam, I am writing to enquire about the Business Management course advertised on your website. I would like to request information about the Photography diploma program. I saw your advertisement for the Data Science course and I am interested in learning more."
+        },
+        {
+          "label": "Main Content",
+          "text": "Could you please provide details about the course duration and start dates? I would be interested to know what qualifications are required for entry. Would it be possible to receive information about scholarship opportunities? I am particularly keen to understand whether practical work experience is included. As I am currently employed full-time, I would appreciate knowing if evening or weekend classes are available."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be most grateful if you could send me a prospectus. I look forward to receiving further details at your earliest convenience. Thank you in advance for your help. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Applying for a volunteer position",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Selection Committee, I am writing to apply for the volunteer teaching position in Nepal. I wish to express my interest in the environmental conservation project. I would like to be considered for the community outreach volunteer role."
+        },
+        {
+          "label": "Main Content",
+          "text": "I have always been passionate about education and helping disadvantaged communities. Over the past three years, I have volunteered at local schools teaching English to refugees. This experience has taught me patience, adaptability, and cross-cultural communication skills. I believe I possess the qualities necessary for this demanding role. I am particularly drawn to this opportunity because it combines my teaching skills with my interest in international development. Moreover, I am a dedicated and enthusiastic individual who works well in teams."
+        },
+        {
+          "label": "Closing",
+          "text": "I would welcome the opportunity to discuss my application in more detail. I am available for an interview at any time that suits you. Thank you for considering my application. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Suggesting plans",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hey Chris, Great to hear from you yesterday! I've been thinking about your visit next month and I have some ideas! This is going to be such an awesome trip!"
+        },
+        {
+          "label": "Main Content",
+          "text": "How about we start with the art museum on Saturday morning? The best time to come is definitely early before it gets crowded. I think you'd really enjoy the new exhibition they have. We could also check out that new Thai restaurant everyone's talking about. If you need help finding somewhere to stay, I can book something for you. Don't worry about transport — I'll pick you up from the station."
+        },
+        {
+          "label": "Closing",
+          "text": "Let me know what dates work for you! Can't wait to show you around the city! This is going to be brilliant fun! Stay in touch! Hugs, / See you soon, / Your mate,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Responding to good news",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Emma, OMG! I just got your email and I'm absolutely thrilled for you! What fantastic news about your engagement! I couldn't be happier that you and Mark are finally tying the knot!"
+        },
+        {
+          "label": "Main Content",
+          "text": "You can't imagine how excited I was when I read your message! Tell me everything — how did he propose? I bet it was incredibly romantic! You absolutely deserve all this happiness. I'd love to help with the wedding planning if you need an extra pair of hands. Have you thought about when and where you'd like the ceremony? I'm free most weekends if you want to go dress shopping together!"
+        },
+        {
+          "label": "Closing",
+          "text": "Congratulations once again to you both! Can't wait to celebrate with you properly! Give my love to Mark! Speak to you very soon! Much love, / Hugs and kisses, / Your excited friend,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Asking for advice",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Lucy, Hope this email finds you well! I'm writing because I really need your advice about something important. You've always given me such good guidance before, so I thought of you immediately!"
+        },
+        {
+          "label": "Main Content",
+          "text": "I've been offered two different jobs and I'm completely torn about which to choose! One pays better but involves lots of travel, while the other has a better work-life balance. What do you think I should consider? If you were in my position, what would you do? On the other hand, you might want to consider the long-term career prospects. From your experience, is salary or job satisfaction more important? I could always discuss it over coffee if you're free this week?"
+        },
+        {
+          "label": "Closing",
+          "text": "I'd really appreciate your thoughts on this! Let me know when you have time for a chat. Thanks in advance for any wisdom you can share! You're a star! Catch up soon, / Your confused friend, / Cheers mate,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Requesting a reference",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Professor Anderson, I hope this email finds you well. I am writing to ask if you would be willing to provide a reference for me. I would be extremely grateful if you could write a letter of recommendation on my behalf."
+        },
+        {
+          "label": "Main Content",
+          "text": "I am applying for the Master's program in Environmental Science at Oxford University. As you supervised my undergraduate dissertation on climate change, I believe you are well-positioned to comment on my academic abilities. The application deadline is March 15th, so I would need the reference by March 10th at the latest. I have attached my CV and a draft of my personal statement for your information. If you require any additional materials, please do not hesitate to let me know."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be deeply grateful for your support with this application. Thank you very much for considering my request. I look forward to hearing from you. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Booking accommodation",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Reservations Manager, I am writing to enquire about availability at your hotel for August. I would like to make a reservation for three nights from July 15th to July 18th. I am interested in booking a family room for four people."
+        },
+        {
+          "label": "Main Content",
+          "text": "Could you please confirm whether you have rooms available for these dates? I would also like to know if breakfast is included in the room rate. Would it be possible to arrange airport transportation? We will be arriving late in the evening, so I would appreciate knowing the check-in procedure. Additionally, could you inform me about any facilities available for children? As we have specific dietary requirements, I would like to enquire about the restaurant menu options."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be grateful if you could send me a quotation for this stay. I look forward to your reply at your earliest convenience. Thank you for your assistance with this matter. (Yours faithfully)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Sharing travel experiences",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hey Rachel! Just got back from my trip to Japan and I had to tell you all about it! It was absolutely incredible — even better than I'd imagined! Wish you could have been there with me!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Tokyo was mind-blowing with all the neon lights and crazy busy streets. The food was out of this world — I must have tried sushi at twenty different places! The temples in Kyoto were so peaceful and beautiful. I took about a thousand photos that I can't wait to show you. The people were so friendly and helpful despite the language barrier. You'd absolutely love it there — we should definitely plan a trip together sometime!"
+        },
+        {
+          "label": "Closing",
+          "text": "I'll bring you some souvenirs when we meet up! Let's arrange a coffee soon so I can tell you everything! Missing you loads! Can't wait to see you! Safe travels, / Your jet-lagged friend, / Big hugs,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Responding to a job offer",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Ms. Thompson, Thank you very much for your email offering me the position of Senior Analyst. I am writing to formally accept this offer with great enthusiasm. I am delighted to confirm my acceptance of the role."
+        },
+        {
+          "label": "Main Content",
+          "text": "As discussed, I understand that my starting salary will be £45,000 per annum with performance-based bonuses. I confirm that I am able to commence employment on April 1st as proposed. I note that you mentioned the need for certain documentation, and I will ensure all required paperwork is submitted before my start date. Could you please confirm the arrangements for my first day, including the reporting time and location?"
+        },
+        {
+          "label": "Closing",
+          "text": "I am very much looking forward to joining your team and contributing to the company's success. Thank you once again for this wonderful opportunity. Please do not hesitate to contact me if you need any further information. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Declining an invitation",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Mike, Thanks so much for inviting me to your party on Saturday! It sounds like it's going to be amazing and I'm really gutted that I can't make it!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Unfortunately, I've already committed to visiting my grandparents that weekend and I can't let them down. They're getting quite elderly and I don't see them often enough. I feel terrible about missing your celebration — I was really looking forward to it! Maybe we could meet up for drinks the following weekend instead? I'd love to catch up properly then."
+        },
+        {
+          "label": "Closing",
+          "text": "Hope you have a fantastic time and I'll be thinking of you! Let me know how it goes! Sorry again, / Lots of love, / Your apologetic friend,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Confirming attendance",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Conference Organizers, I am writing to confirm my attendance at the International Marketing Conference. Thank you for accepting my registration for the event on November 12th. I am pleased to confirm that I will be attending the symposium as planned."
+        },
+        {
+          "label": "Main Content",
+          "text": "I would like to confirm that I will be presenting during the afternoon session as scheduled. Could you please provide information about the presentation equipment that will be available? I will require a laptop connection and a microphone for my 30-minute presentation. Additionally, I would be grateful if you could send me details about the hotel accommodation arrangements. Would it be possible to receive a map of the venue in advance?"
+        },
+        {
+          "label": "Closing",
+          "text": "I look forward to participating in this prestigious event. Thank you for organizing what promises to be an excellent conference. Please contact me if you require any additional information. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Making arrangements",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Sophie{
+  "title": "Email Writing Models",
+  "samples": [
+    {
+      "type": "Informal",
+      "purpose": "Reacting to news and making plans",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear/Hi Tom, It was great to get your message! I'm so happy to hear you're planning to visit! That's wonderful news — I can't wait to see you!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Thanks for writing — I'm really looking forward to your trip! You can't imagine how pleased I am that you're coming! There's so much to see and do here. You should definitely visit the museum. We could go to the new cafe downtown."
+        },
+        {
+          "label": "Closing",
+          "text": "Can't wait to catch up! Write soon and tell me your exact dates. Really looking forward to seeing you! Take care and see you soon! Lots of love, / Best, / Cheers,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Giving advice to a friend",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear/Sue Sir, Congratulations on your news! That's amazing! I was so happy to hear about your offer! Wow, that's brilliant — you must be really excited!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Thanks for your email — I'm so glad you told me! It sounds like a great opportunity! If I were you, I'd definitely accept it. You ought to think about the location before deciding. From my own experience, this type of role is really worth it."
+        },
+        {
+          "label": "Closing",
+          "text": "Let me know what you decide! I can't wait to hear how it goes. Best of luck — I'm sure you'll make the right choice! Keep in touch and tell me everything! Take care, / Love, / All the best,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Inviting a friend",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi there Sarah, Hope you're doing well! I've been meaning to write to you for ages! How have you been lately? I've got some exciting news to share with you!"
+        },
+        {
+          "label": "Main Content",
+          "text": "I'm having a party next Saturday and I'd love you to come! It's going to be at my place around 7pm. There'll be great food and music. I think you'd really enjoy meeting everyone. Why don't we arrange to meet beforehand? I can pick you up if you like."
+        },
+        {
+          "label": "Closing",
+          "text": "Hope you can make it! Let me know if you're free that evening. Looking forward to hearing from you soon! It would be fantastic to see you! Speak soon, / Cheers, / Best wishes,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Thanking and updating",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Alex, Thanks so much for your last email! It was lovely to hear from you after all this time! I really appreciated your kind words and support during that difficult period!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Things have been going much better recently, I'm happy to say! I finally got that job I was hoping for. The best thing about it is the flexible hours. I've also started learning Spanish, which is challenging but fun. You'd be proud of how much progress I've made!"
+        },
+        {
+          "label": "Closing",
+          "text": "Write back soon and tell me your news! I'd love to catch up properly sometime. Maybe we could meet for coffee next month? Take care of yourself! All my love, / Warmest regards, / Bye for now,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Apologizing and explaining",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Jamie, I'm so sorry I haven't written sooner! I feel terrible about missing your birthday celebration last week! Please forgive me for not being in touch — things have been absolutely crazy here!"
+        },
+        {
+          "label": "Main Content",
+          "text": "The reason I couldn't make it was that I had a family emergency. My grandmother suddenly fell ill and I had to rush to the hospital. I hope you understand why I couldn't let you know earlier. I'd really like to make it up to you somehow. Perhaps we could go out for dinner next weekend?"
+        },
+        {
+          "label": "Closing",
+          "text": "Hope you're not too upset with me! Let me know when you're available. Can't wait to celebrate with you properly! Sorry again for everything! Lots of hugs, / Your friend, / Talk soon,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Job application",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir, I am writing with reference to your advertisement for the position of Marketing Manager. I would like to apply for the role of Digital Marketing Specialist recently advertised in The Guardian. I am interested in applying for the post of Sales Executive."
+        },
+        {
+          "label": "Main Content",
+          "text": "During the past few years I have been employed as a Marketing Coordinator at TechCorp. My duties have included managing social media campaigns, which has helped me develop strong analytical skills. I have experience working with international clients and consider myself as a creative problem solver. I believe I would be a suitable candidate because of my proven track record. I am particularly interested in this position as it would allow me to utilize my digital expertise. Furthermore, I am a motivated and reliable person who thrives in challenging environments."
+        },
+        {
+          "label": "Closing",
+          "text": "I very much hope you will consider my application. I would be delighted to attend an interview at your convenience. I look forward to hearing from you. (Yours faithfully,)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Requesting information",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir, I am writing to enquire about your English language courses. I would like to request further information regarding the accommodation options available. I saw your advertisement for summer programs and would like to ask several questions."
+        },
+        {
+          "label": "Main Content",
+          "text": "Could you please tell me whether courses are available in July? I would also like to know if beginner-level classes are offered. Would it be possible to receive details about the course fees and payment methods? I am planning to stay for three weeks, so I would appreciate information on long-term accommodation. As I will be travelling with my family, I would like to know whether family rooms are available."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be grateful if you could reply at your earliest convenience. I look forward to hearing from you soon. Thank you very much for your assistance. (Yours faithfully)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Making a complaint",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir/Madam, I am writing to complain about the service I received at your restaurant last Saturday. I am writing to express my dissatisfaction with the laptop I purchased from your store. I wish to make a formal complaint regarding my recent hotel stay."
+        },
+        {
+          "label": "Main Content",
+          "text": "The main problem was that the food took over two hours to arrive. Furthermore, when it finally came, the meal was cold and poorly prepared. The staff were unhelpful and showed little concern for our complaints. I find this completely unacceptable, especially given the high prices charged. I feel I am entitled to compensation for this disappointing experience. I would appreciate it if you could look into this matter urgently."
+        },
+        {
+          "label": "Closing",
+          "text": "I expect to receive a full refund or at minimum a written apology. I look forward to your prompt response to this matter. Unless I hear from you within seven days, I will take further action. (Yours faithfully)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Requesting information about a course",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Sir or Madam, I am writing to enquire about the Business Management course advertised on your website. I would like to request information about the Photography diploma program. I saw your advertisement for the Data Science course and I am interested in learning more."
+        },
+        {
+          "label": "Main Content",
+          "text": "Could you please provide details about the course duration and start dates? I would be interested to know what qualifications are required for entry. Would it be possible to receive information about scholarship opportunities? I am particularly keen to understand whether practical work experience is included. As I am currently employed full-time, I would appreciate knowing if evening or weekend classes are available."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be most grateful if you could send me a prospectus. I look forward to receiving further details at your earliest convenience. Thank you in advance for your help. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Applying for a volunteer position",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Selection Committee, I am writing to apply for the volunteer teaching position in Nepal. I wish to express my interest in the environmental conservation project. I would like to be considered for the community outreach volunteer role."
+        },
+        {
+          "label": "Main Content",
+          "text": "I have always been passionate about education and helping disadvantaged communities. Over the past three years, I have volunteered at local schools teaching English to refugees. This experience has taught me patience, adaptability, and cross-cultural communication skills. I believe I possess the qualities necessary for this demanding role. I am particularly drawn to this opportunity because it combines my teaching skills with my interest in international development. Moreover, I am a dedicated and enthusiastic individual who works well in teams."
+        },
+        {
+          "label": "Closing",
+          "text": "I would welcome the opportunity to discuss my application in more detail. I am available for an interview at any time that suits you. Thank you for considering my application. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Suggesting plans",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hey Chris, Great to hear from you yesterday! I've been thinking about your visit next month and I have some ideas! This is going to be such an awesome trip!"
+        },
+        {
+          "label": "Main Content",
+          "text": "How about we start with the art museum on Saturday morning? The best time to come is definitely early before it gets crowded. I think you'd really enjoy the new exhibition they have. We could also check out that new Thai restaurant everyone's talking about. If you need help finding somewhere to stay, I can book something for you. Don't worry about transport — I'll pick you up from the station."
+        },
+        {
+          "label": "Closing",
+          "text": "Let me know what dates work for you! Can't wait to show you around the city! This is going to be brilliant fun! Stay in touch! Hugs, / See you soon, / Your mate,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Responding to good news",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Emma, OMG! I just got your email and I'm absolutely thrilled for you! What fantastic news about your engagement! I couldn't be happier that you and Mark are finally tying the knot!"
+        },
+        {
+          "label": "Main Content",
+          "text": "You can't imagine how excited I was when I read your message! Tell me everything — how did he propose? I bet it was incredibly romantic! You absolutely deserve all this happiness. I'd love to help with the wedding planning if you need an extra pair of hands. Have you thought about when and where you'd like the ceremony? I'm free most weekends if you want to go dress shopping together!"
+        },
+        {
+          "label": "Closing",
+          "text": "Congratulations once again to you both! Can't wait to celebrate with you properly! Give my love to Mark! Speak to you very soon! Much love, / Hugs and kisses, / Your excited friend,"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Asking for advice",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Lucy, Hope this email finds you well! I'm writing because I really need your advice about something important. You've always given me such good guidance before, so I thought of you immediately!"
+        },
+        {
+          "label": "Main Content",
+          "text": "I've been offered two different jobs and I'm completely torn about which to choose! One pays better but involves lots of travel, while the other has a better work-life balance. What do you think I should consider? If you were in my position, what would you do? On the other hand, you might want to consider the long-term career prospects. From your experience, is salary or job satisfaction more important? I could always discuss it over coffee if you're free this week?"
+        },
+        {
+          "label": "Closing",
+          "text": "I'd really appreciate your thoughts on this! Let me know when you have time for a chat. Thanks in advance for any wisdom you can share! You're a star! Catch up soon, / Your confused friend, / Cheers mate,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Requesting a reference",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Professor Anderson, I hope this email finds you well. I am writing to ask if you would be willing to provide a reference for me. I would be extremely grateful if you could write a letter of recommendation on my behalf."
+        },
+        {
+          "label": "Main Content",
+          "text": "I am applying for the Master's program in Environmental Science at Oxford University. As you supervised my undergraduate dissertation on climate change, I believe you are well-positioned to comment on my academic abilities. The application deadline is March 15th, so I would need the reference by March 10th at the latest. I have attached my CV and a draft of my personal statement for your information. If you require any additional materials, please do not hesitate to let me know."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be deeply grateful for your support with this application. Thank you very much for considering my request. I look forward to hearing from you. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Booking accommodation",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Reservations Manager, I am writing to enquire about availability at your hotel for August. I would like to make a reservation for three nights from July 15th to July 18th. I am interested in booking a family room for four people."
+        },
+        {
+          "label": "Main Content",
+          "text": "Could you please confirm whether you have rooms available for these dates? I would also like to know if breakfast is included in the room rate. Would it be possible to arrange airport transportation? We will be arriving late in the evening, so I would appreciate knowing the check-in procedure. Additionally, could you inform me about any facilities available for children? As we have specific dietary requirements, I would like to enquire about the restaurant menu options."
+        },
+        {
+          "label": "Closing",
+          "text": "I would be grateful if you could send me a quotation for this stay. I look forward to your reply at your earliest convenience. Thank you for your assistance with this matter. (Yours faithfully)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Sharing travel experiences",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hey Rachel! Just got back from my trip to Japan and I had to tell you all about it! It was absolutely incredible — even better than I'd imagined! Wish you could have been there with me!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Tokyo was mind-blowing with all the neon lights and crazy busy streets. The food was out of this world — I must have tried sushi at twenty different places! The temples in Kyoto were so peaceful and beautiful. I took about a thousand photos that I can't wait to show you. The people were so friendly and helpful despite the language barrier. You'd absolutely love it there — we should definitely plan a trip together sometime!"
+        },
+        {
+          "label": "Closing",
+          "text": "I'll bring you some souvenirs when we meet up! Let's arrange a coffee soon so I can tell you everything! Missing you loads! Can't wait to see you! Safe travels, / Your jet-lagged friend, / Big hugs,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Responding to a job offer",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Ms. Thompson, Thank you very much for your email offering me the position of Senior Analyst. I am writing to formally accept this offer with great enthusiasm. I am delighted to confirm my acceptance of the role."
+        },
+        {
+          "label": "Main Content",
+          "text": "As discussed, I understand that my starting salary will be £45,000 per annum with performance-based bonuses. I confirm that I am able to commence employment on April 1st as proposed. I note that you mentioned the need for certain documentation, and I will ensure all required paperwork is submitted before my start date. Could you please confirm the arrangements for my first day, including the reporting time and location?"
+        },
+        {
+          "label": "Closing",
+          "text": "I am very much looking forward to joining your team and contributing to the company's success. Thank you once again for this wonderful opportunity. Please do not hesitate to contact me if you need any further information. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Declining an invitation",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Mike, Thanks so much for inviting me to your party on Saturday! It sounds like it's going to be amazing and I'm really gutted that I can't make it!"
+        },
+        {
+          "label": "Main Content",
+          "text": "Unfortunately, I've already committed to visiting my grandparents that weekend and I can't let them down. They're getting quite elderly and I don't see them often enough. I feel terrible about missing your celebration — I was really looking forward to it! Maybe we could meet up for drinks the following weekend instead? I'd love to catch up properly then."
+        },
+        {
+          "label": "Closing",
+          "text": "Hope you have a fantastic time and I'll be thinking of you! Let me know how it goes! Sorry again, / Lots of love, / Your apologetic friend,"
+        }
+      ]
+    },
+    {
+      "type": "Formal",
+      "purpose": "Confirming attendance",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Dear Conference Organizers, I am writing to confirm my attendance at the International Marketing Conference. Thank you for accepting my registration for the event on November 12th. I am pleased to confirm that I will be attending the symposium as planned."
+        },
+        {
+          "label": "Main Content",
+          "text": "I would like to confirm that I will be presenting during the afternoon session as scheduled. Could you please provide information about the presentation equipment that will be available? I will require a laptop connection and a microphone for my 30-minute presentation. Additionally, I would be grateful if you could send me details about the hotel accommodation arrangements. Would it be possible to receive a map of the venue in advance?"
+        },
+        {
+          "label": "Closing",
+          "text": "I look forward to participating in this prestigious event. Thank you for organizing what promises to be an excellent conference. Please contact me if you require any additional information. (Yours sincerely)"
+        }
+      ]
+    },
+    {
+      "type": "Informal",
+      "purpose": "Making arrangements",
+      "paragraphs": [
+        {
+          "label": "Opening",
+          "text": "Hi Sophie, Following up on our conversation yesterday about the weekend getaway! I've been looking into some options and I think I've found the perfect place! Let me know what you think about my ideas!"
+        },
+        {
+          "label": "Main Content",
+          "text": "There's a lovely cottage by the lake that's available for Friday to Sunday. It sleeps six people comfortably and has a fireplace — perfect for cozy evenings! The cost is £300 for the weekend, which works out at £50 each if we get six people. I've already spoken to Emma and Jack and they're definitely up for it. We could leave Friday afternoon around 4pm to avoid traffic. Shall I go ahead and book it? I'll need everyone's share by Wednesday if we want to secure it. Let me know asap!"
+        },
+        {
+          "label": "Closing",
+          "text": "This is going to be so much fun! Get back to me when you can about the dates. Can't wait to spend quality time with everyone! Excited already! Chat soon, / Love, / Your enthusiastic friend,"
+        }
+      ]
+    }
+  ]
+}, Following up on our conversation yesterday about the weekend getaway! I've been looking into some options and I think I've found the perfect place! Let me know what you think about my ideas!"
+        },
+        {
+          "label": "Main Content",
+          "text": "There's a lovely cottage by the lake that's available for Friday to Sunday. It sleeps six people comfortably and has a fireplace — perfect for cozy evenings! The cost is £300 for the weekend, which works out at £50 each if we get six people. I've already spoken to Emma and Jack and they're definitely up for it. We could leave Friday afternoon around 4pm to avoid traffic. Shall I go ahead and book it? I'll need everyone's share by Wednesday if we want to secure it. Let me know asap!"
+        },
+        {
+          "label": "Closing",
+          "text": "This is going to be so much fun! Get back to me when you can about the dates. Can't wait to spend quality time with everyone! Excited already! Chat soon, / Love, / Your enthusiastic friend,"
+        }
+      ]
+    }
+  ]
+}, It was great to get your message! I'm so happy to hear you're planning to visit! That's wonderful news — I can't wait to see you!"
         },
         {
           "label": "Main Content",
