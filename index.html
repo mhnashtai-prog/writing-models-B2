@@ -683,7 +683,7 @@
         const currentPara = currentData.samples[currentSampleIndex].paragraphs[paraIndex];
         const totalSamples = currentData.samples.length;
 
-        const highlightedText = highlightDiscourseMarkers(currentPara.text);
+        const highlightedText = highlightFirstWords(currentPara.text);
 
         html += `
           <div class="paragraph-section" data-para-index="${paraIndex}">
@@ -729,73 +729,46 @@
       container.innerHTML = html;
     }
 
-    // Highlight ALL introductory and transitional expressions with blue fill
-    function highlightDiscourseMarkers(text) {
-      const markers = [
-        // Introduction starters
-        'Few people would deny that', 'Nowadays', 'In recent times', 'It is widely recognized that',
-        'There is a growing recognition that', 'Over the past few years', 'It is generally believed that',
-        'It is widely recognised that', 'It is widely acknowledged that', 'These days',
-        'Many people believe that', 'There is an ongoing debate about', 'It is widely believed that',
-        'There is no doubt that', 'It is often argued that', 'In recent years',
-        'It is generally accepted that',
+    // NEW FUNCTION: Automatically highlight first 3-5 words of each sentence
+    function highlightFirstWords(text) {
+      // Split text into sentences (by period, exclamation, or question mark followed by space)
+      const sentences = text.split(/([.!?]\s+)/);
+      
+      let result = '';
+      
+      for (let i = 0; i < sentences.length; i++) {
+        let sentence = sentences[i];
         
-        // Thesis statements
-        'Therefore', 'Hence', 'Consequently', 'Thus', 'it is vital we analyse',
-        'it is vitally important to consider', 'it is essential that we study',
-        'it becomes necessary to evaluate', 'it is vital to examine', 'it is important to examine',
+        // Skip the punctuation separators
+        if (sentence.match(/^[.!?]\s+$/)) {
+          result += sentence;
+          continue;
+        }
         
-        // Advantages/Benefits
-        'The main advantage of', 'One major benefit of', 'A further positive aspect of',
-        'One benefit of', 'Another strong point is that', 'One strong argument in favour of',
-        'A major reason why', 'Supporters of', 'often point out that', 'Advocates of',
+        // Skip empty strings
+        if (!sentence.trim()) {
+          result += sentence;
+          continue;
+        }
         
-        // Disadvantages/Problems
-        'While there are many advantages', 'Although', 'Despite its positive sides',
-        'The key disadvantage of', 'A major drawback of', 'One clear limitation of',
-        'On the other hand', 'However', 'Critics argue that', 'Those who disagree with',
-        'Detractors of', 'Opponents often point out that', 'it is also true that',
+        // Split sentence into words
+        const words = sentence.trim().split(/\s+/);
         
-        // Solutions
-        'One possible solution to this problem would be to',
-        'A practical way to address this issue is to', 'An effective measure could be to',
-        'If such measures were implemented', 'By taking these steps',
+        // Determine how many words to highlight (3-5 words, or fewer if sentence is short)
+        const wordsToHighlight = Math.min(5, Math.max(3, Math.floor(words.length * 0.3)));
         
-        // Causes/Effects
-        'One of the main causes of', 'A major reason behind', 'The primary factor leading to',
-        'As a result', 'This in turn causes', 'One major effect of',
+        // Highlight the first few words
+        const highlightedWords = words.slice(0, wordsToHighlight);
+        const remainingWords = words.slice(wordsToHighlight);
         
-        // Opinion expressions
-        'In my opinion', 'From my perspective', 'I firmly believe that',
-        'Personally', 'I am convinced that', 'I strongly agree that',
-        'I tend to believe that', 'There is no doubt in my mind that',
-        
-        // Conclusions
-        'In conclusion', 'To sum up', 'Overall', 'On balance',
-        'As far as I\'m concerned', 'Taking everything into account',
-        
-        // Other transitions
-        'Moreover', 'Furthermore', 'In addition', 'Additionally', 'Nevertheless',
-        'Conversely', 'Despite this', 'By contrast', 'In contrast', 'For instance',
-        'For example', 'In particular', 'Especially', 'Notably', 'Even though',
-        'It seems to me that', 'it seems that', 'Despite all the concerns',
-        'hold the opposite view', 'while others'
-      ];
-
-      let highlightedText = text;
-      markers.sort((a, b) => b.length - a.length);
-
-      markers.forEach(marker => {
-        const regex = new RegExp(`\\b(${marker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\b`, 'gi');
-        highlightedText = highlightedText.replace(regex, (match) => {
-          if (!highlightedText.includes(`<span class="discourse-marker">${match}</span>`)) {
-            return `<span class="discourse-marker">${match}</span>`;
-          }
-          return match;
-        });
-      });
-
-      return highlightedText;
+        // Reconstruct with highlighting
+        result += `<span class="discourse-marker">${highlightedWords.join(' ')}</span>`;
+        if (remainingWords.length > 0) {
+          result += ' ' + remainingWords.join(' ');
+        }
+      }
+      
+      return result;
     }
 
     // Navigate paragraph
