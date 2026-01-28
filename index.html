@@ -254,27 +254,32 @@
       border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     }
 
-    /* Paragraph Section */
+    /* Paragraph Section - IMPROVED WITH FIXED HEIGHT */
     .paragraph-section {
       position: relative;
-      padding: 1.75rem 0.5rem 3.5rem;
+      padding: 1.75rem 0.5rem;
+      padding-bottom: 60px; /* Fixed space for buttons */
+      min-height: 220px; /* Prevents jumping */
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border-bottom: 1px dotted rgba(0, 0, 0, 0.08);
+      border-bottom: 2px solid rgba(139, 115, 85, 0.2); /* More visible separator */
       cursor: default;
+      margin-bottom: 1rem;
     }
 
     .paragraph-section:last-child {
       border-bottom: none;
+      margin-bottom: 0;
     }
 
     .paragraph-section:hover {
       background: rgba(201, 169, 97, 0.03);
       border-radius: 0.5rem;
+      border-bottom-color: rgba(201, 169, 97, 0.35);
     }
 
     /* Subtle flash effect when content changes */
     .paragraph-section.changing {
-      background: rgba(201, 169, 97, 0.03);
+      background: rgba(201, 169, 97, 0.08);
       border-radius: 0.5rem;
     }
 
@@ -308,17 +313,22 @@
       font-weight: 600;
     }
 
-    /* Navigation Controls - Positioned on Opposite Sides */
-    .paragraph-nav-left {
+    /* Navigation Controls - FIXED POSITIONING */
+    .paragraph-nav-container {
       position: absolute;
       bottom: 0.75rem;
       left: 0.75rem;
+      right: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 36px; /* Fixed height */
     }
 
+    .paragraph-nav-left,
     .paragraph-nav-right {
-      position: absolute;
-      bottom: 0.75rem;
-      right: 0.75rem;
+      display: flex;
+      align-items: center;
     }
 
     /* Navigation Buttons - Smaller, Static, Subtle */
@@ -358,9 +368,6 @@
 
     /* Sample Counter */
     .sample-counter {
-      position: absolute;
-      bottom: 0.5rem;
-      right: 1rem;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.6875rem;
       font-weight: 600;
@@ -500,12 +507,9 @@
       }
 
       .paragraph-section {
-        padding: 1.5rem 0.5rem 3.5rem;
-      }
-
-      .paragraph-section:hover {
-        background: rgba(201, 169, 97, 0.03);
-        border-radius: 0.5rem;
+        padding: 1.5rem 0.5rem;
+        padding-bottom: 60px;
+        min-height: 200px;
       }
 
       .nav-pills {
@@ -677,7 +681,7 @@
         html += `<div class="essay-title">${currentData.title}</div>`;
       }
 
-      // Render each paragraph with navigation below
+      // Render each paragraph with FIXED navigation container
       firstSample.paragraphs.forEach((para, paraIndex) => {
         const currentSampleIndex = paragraphIndices[paraIndex];
         const currentPara = currentData.samples[currentSampleIndex].paragraphs[paraIndex];
@@ -692,25 +696,26 @@
 
             <p class="paragraph-text">${highlightedText}</p>
 
-            <!-- Left Arrow -->
-            <div class="paragraph-nav-left">
-              <button class="nav-btn" 
-                      onclick="navigateParagraph(${paraIndex}, -1)"
-                      ${currentSampleIndex === 0 ? 'disabled' : ''}>
-                ← PREV
-              </button>
-            </div>
+            <!-- Fixed Navigation Container -->
+            <div class="paragraph-nav-container">
+              <div class="paragraph-nav-left">
+                <button class="nav-btn" 
+                        onclick="navigateParagraph(${paraIndex}, -1)"
+                        ${currentSampleIndex === 0 ? 'disabled' : ''}>
+                  ← PREV
+                </button>
+              </div>
 
-            <!-- Right Arrow -->
-            <div class="paragraph-nav-right">
-              <button class="nav-btn" 
-                      onclick="navigateParagraph(${paraIndex}, 1)"
-                      ${currentSampleIndex === totalSamples - 1 ? 'disabled' : ''}>
-                NEXT →
-              </button>
-            </div>
+              <div class="sample-counter">${currentSampleIndex + 1}/${totalSamples}</div>
 
-            <div class="sample-counter">${currentSampleIndex + 1}/${totalSamples}</div>
+              <div class="paragraph-nav-right">
+                <button class="nav-btn" 
+                        onclick="navigateParagraph(${paraIndex}, 1)"
+                        ${currentSampleIndex === totalSamples - 1 ? 'disabled' : ''}>
+                  NEXT →
+                </button>
+              </div>
+            </div>
 
           </div>
         `;
@@ -729,7 +734,7 @@
       container.innerHTML = html;
     }
 
-    // NEW FUNCTION: Automatically highlight first 3-5 words of each sentence
+    // Automatically highlight first 3-5 words of each sentence
     function highlightFirstWords(text) {
       // Split text into sentences (by period, exclamation, or question mark followed by space)
       const sentences = text.split(/([.!?]\s+)/);
