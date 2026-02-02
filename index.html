@@ -169,6 +169,7 @@
     /* LIST VIEW */
     .phrase-list-view {
       display: none;
+      position: relative;
       background: linear-gradient(145deg, rgba(28, 28, 30, 0.95), rgba(20, 20, 22, 0.98));
       backdrop-filter: blur(30px);
       border-radius: 1rem;
@@ -298,6 +299,39 @@
     .phrase-placeholder {
       color: #9ca3af;
       font-style: italic;
+    }
+
+    /* CLOSE BUTTON for List and Swipe Modals */
+    .modal-close-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      color: #C9A961;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 100;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(201, 169, 97, 0.3);
+      border-color: rgba(201, 169, 97, 0.6);
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    .modal-close-btn:active {
+      transform: scale(0.95);
     }
 
     /* SWIPE VIEW - POSTER STYLE */
@@ -752,7 +786,7 @@
       return `
         <div class="view-mode-toggle-mini">
           <button class="view-mode-btn ${currentMode === 'text' ? 'active' : ''}" 
-                  onclick="setViewMode(${paraIndex}, 'text')">Sample</button>
+                  onclick="setViewMode(${paraIndex}, 'text')">Default</button>
           <button class="view-mode-btn ${currentMode === 'list' ? 'active' : ''}" 
                   onclick="setViewMode(${paraIndex}, 'list')">List</button>
           <button class="view-mode-btn ${currentMode === 'swipe' ? 'active' : ''}" 
@@ -774,7 +808,10 @@
         alt2: '⭐'
       };
 
-      let html = `<div class="phrase-list-view ${viewMode === 'list' ? 'active' : ''}">`;
+      let html = `<div class="phrase-list-view ${viewMode === 'list' ? 'active' : ''}">
+        <!-- Close Button -->
+        <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
+      `;
 
       Object.keys(phrases).forEach((groupKey, index) => {
         const groupLabel = groupKey === 'default' ? 'Core Phrases' : 
@@ -819,6 +856,9 @@
 
       let html = `
         <div class="swipe-view ${viewMode === 'swipe' ? 'active' : ''}">
+          <!-- Close Button -->
+          <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
+          
           <div class="swipe-slides-container">
             ${allPhrases.map((phrase, index) => {
               const wordCount = phrase.replace(/\[([^\]]+)\]/g, '$1').split(/\s+/).length;
