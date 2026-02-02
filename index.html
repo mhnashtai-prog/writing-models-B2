@@ -860,6 +860,76 @@
       const phraseSection = getPhraseSection(label);
       if (!phraseSection) return '';
 
+      // Check if this is introduction and we have separate hook/thesis data
+      const isIntroduction = label && (label.toLowerCase().includes('introduction') || label === 'Introduction');
+      
+      let html = `<div class="phrase-list-view ${viewMode === 'list' ? 'active' : ''}">
+        <!-- Close Button -->
+        <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
+      `;
+
+      // For introduction with hook + thesis structure
+      if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
+        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
+        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        
+        if (hookSection && thesisSection) {
+          const hookPhrases = hookSection.phrases;
+          const thesisPhrases = thesisSection.phrases;
+          
+          // Icons for each variant
+          const icons = {
+            default: '📌',
+            alt1: '👍',
+            alt2: '⭐'
+          };
+          
+          // Create paired cards showing hook + thesis together
+          Object.keys(hookPhrases).forEach((groupKey, index) => {
+            const groupLabel = groupKey === 'default' ? 'Complete Introduction Examples' : 
+                              groupKey === 'alt1' ? 'Alternative Examples 1' : 
+                              'Alternative Examples 2';
+            
+            const hooks = hookPhrases[groupKey];
+            const theses = thesisPhrases[groupKey];
+            const maxPairs = Math.max(hooks.length, theses.length);
+            
+            html += `
+              <div class="phrase-group" data-variant="${groupKey}">
+                <div class="phrase-group-icon">
+                  <span>${icons[groupKey]}</span>
+                </div>
+                <div class="phrase-group-content">
+                  <div class="phrase-group-title">${groupLabel}</div>
+                  <div class="phrase-list-wrapper">
+                    <ul class="phrase-list">
+                      ${Array.from({ length: maxPairs }).map((_, i) => {
+                        const hook = hooks[i % hooks.length] || hooks[0];
+                        const thesis = theses[i % theses.length] || theses[0];
+                        return `
+                          <li style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(201, 169, 97, 0.15); list-style: none; padding-left: 0;">
+                            <div style="margin-bottom: 0.75rem; line-height: 1.6;">
+                              ${formatPhrase(hook)}
+                            </div>
+                            <div style="line-height: 1.6;">
+                              ${formatPhrase(thesis)}
+                            </div>
+                          </li>
+                        `;
+                      }).join('')}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+          
+          html += '</div>';
+          return html;
+        }
+      }
+      
+      // Regular sections (non-introduction or fallback)
       const phrases = phraseSection.phrases;
       
       // Icons for each variant
@@ -868,11 +938,6 @@
         alt1: '👍',
         alt2: '⭐'
       };
-
-      let html = `<div class="phrase-list-view ${viewMode === 'list' ? 'active' : ''}">
-        <!-- Close Button -->
-        <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
-      `;
 
       Object.keys(phrases).forEach((groupKey, index) => {
         const groupLabel = groupKey === 'default' ? 'Core Phrases' : 
@@ -903,14 +968,52 @@
     }
 
     function renderSwipeView(paraIndex, label, viewMode) {
-      const phraseSection = getPhraseSection(label);
-      if (!phraseSection) return '';
+      // Check if this is introduction and we have separate hook/thesis data
+      const isIntroduction = label && (label.toLowerCase().includes('introduction') || label === 'Introduction');
+      
+      let allSlides = [];
+      
+      // For introduction with hook + thesis structure
+      if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
+        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
+        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        
+        if (hookSection && thesisSection) {
+          const hookPhrases = hookSection.phrases;
+          const thesisPhrases = thesisSection.phrases;
+          
+          // Create paired slides (hook + thesis together)
+          Object.keys(hookPhrases).forEach(groupKey => {
+            const hooks = hookPhrases[groupKey];
+            const theses = thesisPhrases[groupKey];
+            const maxPairs = Math.max(hooks.length, theses.length);
+            
+            for (let i = 0; i < maxPairs; i++) {
+              const hook = hooks[i % hooks.length] || hooks[0];
+              const thesis = theses[i % theses.length] || theses[0];
+              allSlides.push({
+                type: 'paired',
+                hook: hook,
+                thesis: thesis
+              });
+            }
+          });
+        }
+      }
+      
+      // If no introduction-specific slides, fall back to regular phrase section
+      if (allSlides.length === 0) {
+        const phraseSection = getPhraseSection(label);
+        if (!phraseSection) return '';
 
-      const allPhrases = [];
-      const phrases = phraseSection.phrases;
-      Object.keys(phrases).forEach(groupKey => {
-        phrases[groupKey].forEach(phrase => allPhrases.push(phrase));
-      });
+        const phrases = phraseSection.phrases;
+        Object.keys(phrases).forEach(groupKey => {
+          phrases[groupKey].forEach(phrase => allSlides.push({
+            type: 'single',
+            text: phrase
+          }));
+        });
+      }
 
       const swipeKey = `para_${paraIndex}`;
       const currentSlide = swipeIndices[swipeKey] || 0;
@@ -921,17 +1024,43 @@
           <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
           
           <div class="swipe-slides-container">
-            ${allPhrases.map((phrase, index) => {
-              const wordCount = phrase.replace(/\[([^\]]+)\]/g, '$1').split(/\s+/).length;
-              const sizeClass = wordCount <= 10 ? 'size-small' :
-                               wordCount <= 20 ? 'size-medium' :
-                               wordCount <= 30 ? 'size-large' : 'size-xlarge';
+            ${allSlides.map((slide, index) => {
+              let slideContent = '';
+              
+              if (slide.type === 'paired') {
+                // Hook + Thesis paired slide
+                const combinedText = slide.hook + ' ' + slide.thesis;
+                const wordCount = combinedText.replace(/\[([^\]]+)\]/g, '$1').split(/\s+/).length;
+                const sizeClass = wordCount <= 15 ? 'size-medium' :
+                                 wordCount <= 25 ? 'size-large' : 'size-xlarge';
+                
+                slideContent = `
+                  <div class="swipe-phrase-text ${sizeClass}" style="text-align: left; max-width: 85%;">
+                    <div style="margin-bottom: 1.5rem; line-height: 1.5;">
+                      ${formatPhraseForSwipe(slide.hook)}
+                    </div>
+                    <div style="line-height: 1.5; opacity: 0.95;">
+                      ${formatPhraseForSwipe(slide.thesis)}
+                    </div>
+                  </div>
+                `;
+              } else {
+                // Single phrase slide
+                const wordCount = slide.text.replace(/\[([^\]]+)\]/g, '$1').split(/\s+/).length;
+                const sizeClass = wordCount <= 10 ? 'size-small' :
+                                 wordCount <= 20 ? 'size-medium' :
+                                 wordCount <= 30 ? 'size-large' : 'size-xlarge';
+                
+                slideContent = `
+                  <div class="swipe-phrase-text ${sizeClass}">
+                    ${formatPhraseForSwipe(slide.text)}
+                  </div>
+                `;
+              }
               
               return `
                 <div class="swipe-slide ${index === currentSlide ? 'active' : ''}">
-                  <div class="swipe-phrase-text ${sizeClass}">
-                    ${formatPhraseForSwipe(phrase)}
-                  </div>
+                  ${slideContent}
                 </div>
               `;
             }).join('')}
@@ -940,12 +1069,12 @@
               <button class="swipe-arrow" onclick="navigateSwipe(${paraIndex}, -1)"
                       ${currentSlide === 0 ? 'disabled' : ''}>←</button>
               <button class="swipe-arrow" onclick="navigateSwipe(${paraIndex}, 1)"
-                      ${currentSlide === allPhrases.length - 1 ? 'disabled' : ''}>→</button>
+                      ${currentSlide === allSlides.length - 1 ? 'disabled' : ''}>→</button>
             </div>
           </div>
 
           <div class="swipe-nav-dots">
-            ${allPhrases.map((_, index) => `
+            ${allSlides.map((_, index) => `
               <div class="swipe-dot ${index === currentSlide ? 'active' : ''}" 
                    onclick="goToSwipeSlide(${paraIndex}, ${index})"></div>
             `).join('')}
@@ -1005,19 +1134,36 @@
       const swipeKey = `para_${paraIndex}`;
       const currentIndex = swipeIndices[swipeKey] || 0;
       
-      const phraseSection = getPhraseSection(
-        currentData.samples[0].paragraphs[paraIndex].label
-      );
-      if (!phraseSection) return;
-
-      const phrases = phraseSection.phrases;
-      let totalPhrases = 0;
-      Object.keys(phrases).forEach(key => {
-        totalPhrases += phrases[key].length;
-      });
+      const label = currentData.samples[0].paragraphs[paraIndex].label;
+      const isIntroduction = label && (label.toLowerCase().includes('introduction') || label === 'Introduction');
+      
+      let totalSlides = 0;
+      
+      // Count slides based on introduction or regular paragraph
+      if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
+        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
+        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        
+        if (hookSection && thesisSection) {
+          const hookPhrases = hookSection.phrases;
+          Object.keys(hookPhrases).forEach(groupKey => {
+            const hooks = hookPhrases[groupKey];
+            const theses = thesisSection.phrases[groupKey] || [];
+            totalSlides += Math.max(hooks.length, theses.length);
+          });
+        }
+      } else {
+        const phraseSection = getPhraseSection(label);
+        if (phraseSection) {
+          const phrases = phraseSection.phrases;
+          Object.keys(phrases).forEach(key => {
+            totalSlides += phrases[key].length;
+          });
+        }
+      }
 
       const newIndex = currentIndex + direction;
-      if (newIndex >= 0 && newIndex < totalPhrases) {
+      if (newIndex >= 0 && newIndex < totalSlides) {
         swipeIndices[swipeKey] = newIndex;
         renderWriting();
       }
