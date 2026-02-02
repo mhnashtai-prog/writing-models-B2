@@ -688,12 +688,27 @@
 
     // Paragraph label to phrase section mapping
     const SECTION_MAP = {
+      // Introduction variations
       'Introduction': 'introduction_context',
+      'INTRODUCTION': 'introduction_context',
+      
+      // Thesis variations
       'Thesis (Last line of introduction)': 'thesis_statement',
+      'Thesis': 'thesis_statement',
+      
+      // Body paragraphs
       'Body Paragraph 1 - Advantage': 'advantages',
       'Body Paragraph 2 - Advantage': 'advantages',
+      'Body Paragraph A - Advantage': 'advantages',
+      'Body Paragraph A - Advantages': 'advantages',
+      
       'Body Paragraph 3 - Disadvantage': 'disadvantages',
-      'Conclusion': 'conclusion'
+      'Body Paragraph B - Disadvantage': 'disadvantages',
+      'Body Paragraph B - Disadvantages': 'disadvantages',
+      
+      // Conclusion
+      'Conclusion': 'conclusion',
+      'CONCLUSION': 'conclusion'
     };
 
     // Load writing type
@@ -993,13 +1008,23 @@
     }
 
     function getPhraseSection(paragraphLabel) {
-      if (!phraseData) return null;
+      console.log('🔍 getPhraseSection called with:', paragraphLabel);
+      
+      if (!phraseData) {
+        console.log('❌ No phraseData available');
+        return null;
+      }
 
       const essayType = ESSAY_TYPE_MAP[currentType];
+      console.log('📝 Essay type:', essayType);
       if (!essayType) return null;
 
       const sectionKey = SECTION_MAP[paragraphLabel];
-      if (!sectionKey) return null;
+      console.log('🗝️ Section key:', sectionKey);
+      if (!sectionKey) {
+        console.log('❌ No section mapping for:', paragraphLabel);
+        return null;
+      }
 
       // Determine which phrase file to use based on section
       let sourceData = null;
@@ -1008,20 +1033,29 @@
       if (sectionKey === 'introduction_context') {
         // Try hook first, fallback to full
         sourceData = phraseData.hook || phraseData.full;
+        console.log('📖 Using hook data:', !!sourceData);
       } else if (sectionKey === 'thesis_statement') {
         // Use thesis file
         sourceData = phraseData.thesis || phraseData.full;
+        console.log('🎯 Using thesis data:', !!sourceData);
       } else {
         // Body paragraphs and conclusion use full structures
         sourceData = phraseData.full;
+        console.log('📚 Using full structures:', !!sourceData);
       }
 
-      if (!sourceData) return null;
+      if (!sourceData) {
+        console.log('❌ No source data found');
+        return null;
+      }
 
       const structure = sourceData.structures[essayType];
+      console.log('🏗️ Structure found:', !!structure);
       if (!structure) return null;
 
-      return structure.sections[sectionKey];
+      const result = structure.sections[sectionKey];
+      console.log('✅ Final result:', !!result);
+      return result;
     }
 
     function formatPhrase(phrase) {
