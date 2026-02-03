@@ -1551,22 +1551,20 @@ else if (currentType === 'reviews') {
 }
 
 // Emails - ADD "else" HERE
-else if (currentType === 'emails') {
-  if (sectionKey && sectionKey.includes('opening')) {
-    sourceData = phraseData.hook;
-  }
-  else if (sectionKey && sectionKey.includes('body')) {
-    sourceData = phraseData.thesis;
-  }
-  else if (sectionKey && sectionKey.includes('closing')) {
-    sourceData = phraseData.full;
-  }
-  
-  if (!sourceData) {
-    return null;
+else if (currentType === 'emails') {   // ✅ ADD "else" HERE
+    if (labelLower.includes('opening') || labelLower.includes('greeting')) {
+      sectionKey = labelLower.includes('formal') ? 'opening_formal' : 'opening_informal';
+    }
+    else if (labelLower.includes('body') || 
+             labelLower.includes('main') ||
+             labelLower.includes('content')) {
+      sectionKey = labelLower.includes('formal') ? 'body_formal' : 'body_informal';
+    }
+    else if (labelLower.includes('closing') || labelLower.includes('sign off')) {
+      sectionKey = labelLower.includes('formal') ? 'closing_formal' : 'closing_informal';
+    }
   }
 }
-      
 
       if (!sourceData) {
         return null;
