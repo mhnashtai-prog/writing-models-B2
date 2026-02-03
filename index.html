@@ -1515,54 +1515,47 @@ const SECTION_MAP = {
         return null;
       }
 
-     let sourceData = null;
+      // FIXED: Proper sourceData logic with proper else-if structure
+      let sourceData = null;
 
-// Essays
-if (currentType === 'essays') {
-  if (sectionKey === 'introduction_context') {
-    sourceData = phraseData.hook || phraseData.full;
-  } else if (sectionKey === 'thesis_statement') {
-    sourceData = phraseData.thesis || phraseData.full;
-  } else {
-    sourceData = phraseData.full;
-  }
-}
-
-// Reports - ADD "else" HERE
-else if (currentType === 'reports') {
-  if (sectionKey === 'introduction_purpose') {
-    sourceData = phraseData.hook || phraseData.full;
-  } else if (sectionKey === 'introduction_basis') {
-    sourceData = phraseData.thesis || phraseData.full;
-  } else {
-    sourceData = phraseData.full;
-  }
-}
-
-// Reviews - ADD "else" HERE
-else if (currentType === 'reviews') {
-  if (sectionKey === 'introduction_opening') {
-    sourceData = phraseData.hook || phraseData.full;
-  } else if (sectionKey === 'introduction_background') {
-    sourceData = phraseData.thesis || phraseData.full;
-  } else {
-    sourceData = phraseData.full;
-  }
-}
-
-// Emails - ADD "else" HERE
-    const structure = sourceData ? null : (
-          sectionKey && (sectionKey.includes('opening') || sectionKey === 'opening_informal' || sectionKey === 'opening_formal') ? 
-            phraseData.hook :
-          sectionKey && (sectionKey.includes('body') || sectionKey === 'body_informal' || sectionKey === 'body_formal') ?
-            phraseData.thesis :
-          sectionKey && (sectionKey.includes('closing') || sectionKey === 'closing_informal' || sectionKey === 'closing_formal') ?
-            phraseData.full :
-          null
-        );
-        
-        if (structure) {
-          sourceData = structure;
+      // Essays
+      if (currentType === 'essays') {
+        if (sectionKey === 'introduction_context') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'thesis_statement') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      // Reports
+      else if (currentType === 'reports') {
+        if (sectionKey === 'introduction_purpose') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'introduction_basis') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      // Reviews
+      else if (currentType === 'reviews') {
+        if (sectionKey === 'introduction_opening') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'introduction_background') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      // Emails
+      else if (currentType === 'emails') {
+        if (sectionKey && (sectionKey.includes('opening') || sectionKey === 'opening_informal' || sectionKey === 'opening_formal')) {
+          sourceData = phraseData.hook;
+        } else if (sectionKey && (sectionKey.includes('body') || sectionKey === 'body_informal' || sectionKey === 'body_formal')) {
+          sourceData = phraseData.thesis;
+        } else if (sectionKey && (sectionKey.includes('closing') || sectionKey === 'closing_informal' || sectionKey === 'closing_formal')) {
+          sourceData = phraseData.full;
         }
       }
 
