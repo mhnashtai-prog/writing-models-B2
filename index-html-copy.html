@@ -711,21 +711,80 @@
         hook: 'data/essay-hook.json',
         thesis: 'data/essay-thesis.json',
         full: 'data/essay-full-structures.json'
+      },
+      reports: {
+        hook: 'data/report-intro-purpose.json',
+        thesis: 'data/report-intro-basis.json',
+        full: 'data/report-full-structures.json'
+      },
+      reviews: {
+        hook: 'data/review-intro-opening.json',
+        thesis: 'data/review-intro-background.json',
+        full: 'data/review-full-structures.json'
+      },
+      emails: {
+        hook: 'data/email-opening.json',
+        thesis: 'data/email-body.json',
+        full: 'data/email-closing.json'
       }
     };
 
     const ESSAY_TYPE_MAP = {
-      essays: 'for_and_against'
+      essays: 'for_and_against',
+      reports: 'formal_report',
+      reviews: 'product_review',
+      emails: 'informal_email'  // Will be determined dynamically based on email type
     };
 
     const SECTION_MAP = {
+      // Essays
       'Introduction': 'introduction_context',
       'INTRODUCTION': 'introduction_context',
       'Thesis': 'thesis_statement',
       'Body Paragraph 1 - Advantage': 'advantages',
       'Body Paragraph 2 - Advantage': 'advantages',
       'Body Paragraph 3 - Disadvantage': 'disadvantages',
-      'Conclusion': 'conclusion'
+      'Conclusion': 'conclusion',
+      'CONCLUSION': 'conclusion',
+      
+      // Reports - comprehensive mappings
+      'Introduction - Purpose': 'introduction_purpose',
+      'Introduction - Basis': 'introduction_basis',
+      'INTRODUCTION': 'introduction_purpose',  // For reports using just "INTRODUCTION"
+      'General View': 'general_view',
+      'GENERAL VIEW': 'general_view',
+      'Praising': 'praising',
+      'PRAISING': 'praising',
+      'Criticising': 'criticising',
+      'CRITICISING': 'criticising',
+      'Criticizing': 'criticising',
+      'CRITICIZING': 'criticising',
+      'Recommendation': 'recommendation',
+      'RECOMMENDATION': 'recommendation',
+      'Recommendations': 'recommendation',
+      'RECOMMENDATIONS': 'recommendation',
+      
+      // Reviews
+      'Introduction - Opening': 'introduction_opening',
+      'Introduction - Background': 'introduction_background',
+      'Reputation': 'introduction_background',
+      'REPUTATION': 'introduction_background',
+      'Features': 'features',
+      'FEATURES': 'features',
+      
+      // Emails
+      'Opening': 'opening_informal',
+      'OPENING': 'opening_informal',
+      'Opening - Informal': 'opening_informal',
+      'Opening - Formal': 'opening_formal',
+      'Body': 'body_informal',
+      'BODY': 'body_informal',
+      'Body - Informal': 'body_informal',
+      'Body - Formal': 'body_formal',
+      'Closing': 'closing_informal',
+      'CLOSING': 'closing_informal',
+      'Closing - Informal': 'closing_informal',
+      'Closing - Formal': 'closing_formal'
     };
 
     async function loadWritingType(type) {
@@ -751,8 +810,8 @@
         
         currentData = await modelsResponse.json();
 
-        // Load phrase banks for essays
-        if (type === 'essays' && PHRASE_PATHS[type]) {
+        // Load phrase banks for essays, reports, reviews, and emails
+        if ((type === 'essays' || type === 'reports' || type === 'reviews' || type === 'emails') && PHRASE_PATHS[type]) {
           const [hookRes, thesisRes, fullRes] = await Promise.all([
             fetch(PHRASE_PATHS[type].hook),
             fetch(PHRASE_PATHS[type].thesis),
@@ -839,8 +898,36 @@
     }
 
     function renderViewModeToggle(paraIndex, label) {
-      const hasPhrases = phraseData && getPhraseSection(label);
-      if (!hasPhrases) return '';
+      if (!label) return '';
+      
+      // Special handling for introduction-related sections
+      const labelLower = label.toLowerCase();
+      const isIntroductionRelated = labelLower.includes('introduction') || 
+                                     labelLower.includes('reputation') ||
+                                     labelLower.includes('background');
+      
+      // Special handling for email sections
+      const isEmailSection = labelLower.includes('opening') ||
+                             labelLower.includes('body') ||
+                             labelLower.includes('closing') ||
+                             labelLower.includes('greeting') ||
+                             labelLower.includes('sign off');
+      
+      // Check if we have phrase data for this section
+      let hasPhrases = false;
+      
+      if ((isIntroductionRelated || isEmailSection) && phraseData && (phraseData.hook || phraseData.thesis || phraseData.full)) {
+        // Introduction-related and email sections always have phrase support when phrase data exists
+        hasPhrases = true;
+      } else {
+        // For other sections, check getPhraseSection
+        hasPhrases = phraseData && getPhraseSection(label);
+      }
+      
+      if (!hasPhrases) {
+        console.log('❌ No phrases found for:', label);
+        return '';
+      }
 
       const currentMode = viewModes[paraIndex];
 
@@ -860,18 +947,32 @@
       const phraseSection = getPhraseSection(label);
       if (!phraseSection) return '';
 
-      // Check if this is introduction and we have separate hook/thesis data
+      // Check if this should be paired introduction display
       const isIntroduction = label && (label.toLowerCase().includes('introduction') || label === 'Introduction');
+      const isPairedSection = isIntroduction || 
+                              (currentType === 'reviews' && label && label.toLowerCase().includes('reputation'));
       
       let html = `<div class="phrase-list-view ${viewMode === 'list' ? 'active' : ''}">
         <!-- Close Button -->
         <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
       `;
 
-      // For introduction with hook + thesis structure
-      if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
-        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
-        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+      // For introduction with hook + thesis structure (essays, reports, reviews)
+      // OR for reputation section in reviews (which uses background phrases)
+      if (isPairedSection && phraseData && phraseData.hook && phraseData.thesis) {
+        const essayType = ESSAY_TYPE_MAP[currentType];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        
+        let thesisSectionKey;
+        if (currentType === 'essays') {
+          thesisSectionKey = 'thesis_statement';
+        } else if (currentType === 'reports') {
+          thesisSectionKey = 'introduction_basis';
+        } else if (currentType === 'reviews') {
+          thesisSectionKey = 'introduction_background';
+        }
+        
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[thesisSectionKey];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
@@ -973,10 +1074,21 @@
       
       let allSlides = [];
       
-      // For introduction with hook + thesis structure
+      // For introduction with hook + thesis structure (essays, reports, reviews)
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
-        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
-        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        const essayType = ESSAY_TYPE_MAP[currentType];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        
+        let thesisSectionKey;
+        if (currentType === 'essays') {
+          thesisSectionKey = 'thesis_statement';
+        } else if (currentType === 'reports') {
+          thesisSectionKey = 'introduction_basis';
+        } else if (currentType === 'reviews') {
+          thesisSectionKey = 'introduction_background';
+        }
+        
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[thesisSectionKey];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
@@ -1092,23 +1204,174 @@
       const essayType = ESSAY_TYPE_MAP[currentType];
       if (!essayType) return null;
 
-      const sectionKey = SECTION_MAP[paragraphLabel];
-      if (!sectionKey) return null;
-
-      let sourceData = null;
-      if (sectionKey === 'introduction_context') {
-        sourceData = phraseData.hook || phraseData.full;
-      } else if (sectionKey === 'thesis_statement') {
-        sourceData = phraseData.thesis || phraseData.full;
-      } else {
-        sourceData = phraseData.full;
+      // Try exact match first
+      let sectionKey = SECTION_MAP[paragraphLabel];
+      
+      // If no exact match, try case-insensitive and partial matches
+      if (!sectionKey) {
+        const labelLower = paragraphLabel?.toLowerCase() || '';
+        
+        // Reports
+        if (currentType === 'reports') {
+          // Check for introduction variations
+          if (labelLower.includes('introduction')) {
+            sectionKey = 'introduction_purpose';
+          }
+          // Check for general view/overview
+          else if (labelLower.includes('general') || labelLower.includes('overview')) {
+            sectionKey = 'general_view';
+          }
+          // Check for positive aspects (praising)
+          else if (labelLower.includes('prais') || 
+                   labelLower.includes('positive') || 
+                   labelLower.includes('strength') || 
+                   labelLower.includes('popular') ||
+                   labelLower.includes('achievement') ||
+                   labelLower.includes('improvement')) {
+            sectionKey = 'praising';
+          }
+          // Check for negative aspects (criticising)
+          else if (labelLower.includes('critic') || 
+                   labelLower.includes('concern') || 
+                   labelLower.includes('negative') ||
+                   labelLower.includes('problem') ||
+                   labelLower.includes('issue') ||
+                   labelLower.includes('challenge')) {
+            sectionKey = 'criticising';
+          }
+          // Check for recommendations
+          else if (labelLower.includes('recommend')) {
+            sectionKey = 'recommendation';
+          }
+          // Check for conclusion
+          else if (labelLower.includes('conclusion')) {
+            sectionKey = 'conclusion';
+          }
+        }
+        
+        // Reviews
+        if (currentType === 'reviews') {
+          // Check for introduction variations
+          if (labelLower.includes('introduction')) {
+            sectionKey = 'introduction_opening';
+          }
+          // Check for reputation (background/context about the item)
+          else if (labelLower.includes('reputation') || 
+                   labelLower.includes('background') ||
+                   labelLower.includes('known for') ||
+                   labelLower.includes('famous')) {
+            sectionKey = 'introduction_background';
+          }
+          // Check for features
+          else if (labelLower.includes('feature')) {
+            sectionKey = 'features';
+          }
+          // Check for recommendation
+          else if (labelLower.includes('recommend')) {
+            sectionKey = 'recommendation';
+          }
+        }
+        
+        // Emails
+        if (currentType === 'emails') {
+          // Check for opening
+          if (labelLower.includes('opening') || labelLower.includes('greeting')) {
+            // Determine if formal or informal based on label
+            sectionKey = labelLower.includes('formal') ? 'opening_formal' : 'opening_informal';
+          }
+          // Check for body
+          else if (labelLower.includes('body') || labelLower.includes('main')) {
+            sectionKey = labelLower.includes('formal') ? 'body_formal' : 'body_informal';
+          }
+          // Check for closing
+          else if (labelLower.includes('closing') || labelLower.includes('sign off')) {
+            sectionKey = labelLower.includes('formal') ? 'closing_formal' : 'closing_informal';
+          }
+        }
+      }
+      
+      if (!sectionKey) {
+        console.log('❌ No section key found for:', paragraphLabel);
+        return null;
       }
 
-      if (!sourceData) return null;
-      const structure = sourceData.structures[essayType];
-      if (!structure) return null;
+      let sourceData = null;
+      
+      // For essays
+      if (currentType === 'essays') {
+        if (sectionKey === 'introduction_context') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'thesis_statement') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      
+      // For reports
+      if (currentType === 'reports') {
+        if (sectionKey === 'introduction_purpose') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'introduction_basis') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      
+      // For reviews
+      if (currentType === 'reviews') {
+        if (sectionKey === 'introduction_opening') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'introduction_background') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      
+      // For emails
+      if (currentType === 'emails') {
+        // Determine if this is formal or informal email based on sectionKey
+        const isFormal = sectionKey && sectionKey.includes('formal');
+        const emailType = isFormal ? 'formal_email' : 'informal_email';
+        
+        // Override the essay type for emails dynamically
+        const structure = sourceData ? null : (
+          sectionKey && (sectionKey.includes('opening') || sectionKey === 'opening_informal' || sectionKey === 'opening_formal') ? 
+            phraseData.hook :
+          sectionKey && (sectionKey.includes('body') || sectionKey === 'body_informal' || sectionKey === 'body_formal') ?
+            phraseData.thesis :
+          sectionKey && (sectionKey.includes('closing') || sectionKey === 'closing_informal' || sectionKey === 'closing_formal') ?
+            phraseData.full :
+          null
+        );
+        
+        if (structure) {
+          sourceData = structure;
+        }
+      }
 
-      return structure.sections[sectionKey];
+      if (!sourceData) {
+        console.log('❌ No source data found');
+        return null;
+      }
+      
+      // Get the appropriate essay type (for emails, determine formal vs informal from sectionKey)
+      let lookupType = essayType;
+      if (currentType === 'emails' && sectionKey) {
+        lookupType = sectionKey.includes('formal') ? 'formal_email' : 'informal_email';
+      }
+      
+      const structure = sourceData.structures[lookupType];
+      if (!structure) {
+        console.log('❌ No structure found for type:', lookupType);
+        return null;
+      }
+
+      const section = structure.sections[sectionKey];
+      console.log('✅ Found section:', sectionKey, section ? 'YES' : 'NO');
+      return section;
     }
 
     function formatPhrase(phrase) {
@@ -1141,8 +1404,19 @@
       
       // Count slides based on introduction or regular paragraph
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
-        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
-        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        const essayType = ESSAY_TYPE_MAP[currentType];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        
+        let thesisSectionKey;
+        if (currentType === 'essays') {
+          thesisSectionKey = 'thesis_statement';
+        } else if (currentType === 'reports') {
+          thesisSectionKey = 'introduction_basis';
+        } else if (currentType === 'reviews') {
+          thesisSectionKey = 'introduction_background';
+        }
+        
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[thesisSectionKey];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
