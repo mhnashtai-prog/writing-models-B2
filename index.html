@@ -733,14 +733,25 @@
       'Body Paragraph 2 - Advantage': 'advantages',
       'Body Paragraph 3 - Disadvantage': 'disadvantages',
       'Conclusion': 'conclusion',
+      'CONCLUSION': 'conclusion',
       
-      // Reports
+      // Reports - comprehensive mappings
       'Introduction - Purpose': 'introduction_purpose',
       'Introduction - Basis': 'introduction_basis',
+      'INTRODUCTION': 'introduction_purpose',  // For reports using just "INTRODUCTION"
+      'Introduction': 'introduction_purpose',   // For reports using just "Introduction"
       'General View': 'general_view',
+      'GENERAL VIEW': 'general_view',
       'Praising': 'praising',
+      'PRAISING': 'praising',
       'Criticising': 'criticising',
-      'Recommendation': 'recommendation'
+      'CRITICISING': 'criticising',
+      'Criticizing': 'criticising',
+      'CRITICIZING': 'criticising',
+      'Recommendation': 'recommendation',
+      'RECOMMENDATION': 'recommendation',
+      'Recommendations': 'recommendation',
+      'RECOMMENDATIONS': 'recommendation'
     };
 
     async function loadWritingType(type) {
@@ -1109,8 +1120,53 @@
       const essayType = ESSAY_TYPE_MAP[currentType];
       if (!essayType) return null;
 
-      const sectionKey = SECTION_MAP[paragraphLabel];
-      if (!sectionKey) return null;
+      // Try exact match first
+      let sectionKey = SECTION_MAP[paragraphLabel];
+      
+      // If no exact match, try case-insensitive and partial matches for reports
+      if (!sectionKey && currentType === 'reports') {
+        const labelLower = paragraphLabel?.toLowerCase() || '';
+        
+        // Check for introduction variations
+        if (labelLower.includes('introduction')) {
+          sectionKey = 'introduction_purpose';
+        }
+        // Check for general view/overview
+        else if (labelLower.includes('general') || labelLower.includes('overview')) {
+          sectionKey = 'general_view';
+        }
+        // Check for positive aspects (praising)
+        else if (labelLower.includes('prais') || 
+                 labelLower.includes('positive') || 
+                 labelLower.includes('strength') || 
+                 labelLower.includes('popular') ||
+                 labelLower.includes('achievement') ||
+                 labelLower.includes('improvement')) {
+          sectionKey = 'praising';
+        }
+        // Check for negative aspects (criticising)
+        else if (labelLower.includes('critic') || 
+                 labelLower.includes('concern') || 
+                 labelLower.includes('negative') ||
+                 labelLower.includes('problem') ||
+                 labelLower.includes('issue') ||
+                 labelLower.includes('challenge')) {
+          sectionKey = 'criticising';
+        }
+        // Check for recommendations
+        else if (labelLower.includes('recommend')) {
+          sectionKey = 'recommendation';
+        }
+        // Check for conclusion
+        else if (labelLower.includes('conclusion')) {
+          sectionKey = 'conclusion';
+        }
+      }
+      
+      if (!sectionKey) {
+        console.log('❌ No section key found for:', paragraphLabel);
+        return null;
+      }
 
       let sourceData = null;
       
@@ -1136,11 +1192,20 @@
         }
       }
 
-      if (!sourceData) return null;
+      if (!sourceData) {
+        console.log('❌ No source data found');
+        return null;
+      }
+      
       const structure = sourceData.structures[essayType];
-      if (!structure) return null;
+      if (!structure) {
+        console.log('❌ No structure found for essay type:', essayType);
+        return null;
+      }
 
-      return structure.sections[sectionKey];
+      const section = structure.sections[sectionKey];
+      console.log('✅ Found section:', sectionKey, section ? 'YES' : 'NO');
+      return section;
     }
 
     function formatPhrase(phrase) {
