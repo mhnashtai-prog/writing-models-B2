@@ -761,6 +761,8 @@
       // Reviews
       'Introduction - Opening': 'introduction_opening',
       'Introduction - Background': 'introduction_background',
+      'Reputation': 'introduction_background',
+      'REPUTATION': 'introduction_background',
       'Features': 'features',
       'FEATURES': 'features'
     };
@@ -876,8 +878,29 @@
     }
 
     function renderViewModeToggle(paraIndex, label) {
-      const hasPhrases = phraseData && getPhraseSection(label);
-      if (!hasPhrases) return '';
+      if (!label) return '';
+      
+      // Special handling for introduction-related sections
+      const labelLower = label.toLowerCase();
+      const isIntroductionRelated = labelLower.includes('introduction') || 
+                                     labelLower.includes('reputation') ||
+                                     labelLower.includes('background');
+      
+      // Check if we have phrase data for this section
+      let hasPhrases = false;
+      
+      if (isIntroductionRelated && phraseData && (phraseData.hook || phraseData.thesis || phraseData.full)) {
+        // Introduction-related sections always have phrase support when phrase data exists
+        hasPhrases = true;
+      } else {
+        // For other sections, check getPhraseSection
+        hasPhrases = phraseData && getPhraseSection(label);
+      }
+      
+      if (!hasPhrases) {
+        console.log('❌ No phrases found for:', label);
+        return '';
+      }
 
       const currentMode = viewModes[paraIndex];
 
@@ -897,8 +920,10 @@
       const phraseSection = getPhraseSection(label);
       if (!phraseSection) return '';
 
-      // Check if this is introduction and we have separate hook/thesis data
+      // Check if this should be paired introduction display
       const isIntroduction = label && (label.toLowerCase().includes('introduction') || label === 'Introduction');
+      const isPairedSection = isIntroduction || 
+                              (currentType === 'reviews' && label && label.toLowerCase().includes('reputation'));
       
       let html = `<div class="phrase-list-view ${viewMode === 'list' ? 'active' : ''}">
         <!-- Close Button -->
@@ -906,7 +931,8 @@
       `;
 
       // For introduction with hook + thesis structure (essays, reports, reviews)
-      if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
+      // OR for reputation section in reviews (which uses background phrases)
+      if (isPairedSection && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
         const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
         
@@ -1201,6 +1227,13 @@
           // Check for introduction variations
           if (labelLower.includes('introduction')) {
             sectionKey = 'introduction_opening';
+          }
+          // Check for reputation (background/context about the item)
+          else if (labelLower.includes('reputation') || 
+                   labelLower.includes('background') ||
+                   labelLower.includes('known for') ||
+                   labelLower.includes('famous')) {
+            sectionKey = 'introduction_background';
           }
           // Check for features
           else if (labelLower.includes('feature')) {
