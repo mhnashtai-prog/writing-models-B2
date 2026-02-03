@@ -96,6 +96,57 @@
       transform: scale(1.1);
     }
 
+    /* ===== READING MODE TOGGLE ===== */
+    .reading-mode-toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      gap: 0;
+    }
+
+    .mode-toggle-container {
+      display: inline-flex;
+      background: rgba(28, 28, 30, 0.6);
+      backdrop-filter: blur(20px);
+      border-radius: 2rem;
+      padding: 0.35rem;
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .mode-toggle-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      background: transparent;
+      border-radius: 1.5rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: rgba(229, 229, 231, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .mode-toggle-btn:hover {
+      color: rgba(229, 229, 231, 0.8);
+    }
+
+    .mode-toggle-btn.active {
+      background: linear-gradient(135deg, #c9a961 0%, #FFD700 100%);
+      color: #1a1410;
+      box-shadow: 0 4px 15px rgba(201, 169, 97, 0.4);
+    }
+
+    .mode-icon {
+      font-size: 1rem;
+    }
+
     /* ESSAY CONTAINER */
     .essay-container {
       background: linear-gradient(135deg, #f5f1e8 0%, #ede8dc 100%);
@@ -117,6 +168,105 @@
       line-height: 1.3;
       padding-bottom: 1.5rem;
       border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===== COMPLETE TEXT MODE ===== */
+    .complete-text-view {
+      display: none;
+    }
+
+    .complete-text-view.active {
+      display: block;
+    }
+
+    .complete-paragraph {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(139, 115, 85, 0.15);
+    }
+
+    .complete-paragraph:last-of-type {
+      border-bottom: none;
+      margin-bottom: 3rem;
+    }
+
+    .complete-section-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #6b5843;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(201, 169, 97, 0.3);
+    }
+
+    .complete-paragraph-text {
+      font-family: 'Crimson Text', Georgia, serif;
+      font-size: 1.1875rem;
+      line-height: 1.85;
+      color: #2a2a2a;
+      text-align: justify;
+      text-indent: 2.5rem;
+      margin: 0;
+    }
+
+    /* Complete Mode Navigation */
+    .complete-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+      border-top: 2px solid rgba(139, 115, 85, 0.2);
+    }
+
+    .complete-nav-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid rgba(201, 169, 97, 0.3);
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(135deg, #9a9186 0%, #c9a961 100%);
+      color: #2a2420;
+      box-shadow: 0 2px 8px rgba(154, 145, 134, 0.2);
+    }
+
+    .complete-nav-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #c9a961 0%, #FFD700 100%);
+      box-shadow: 0 4px 15px rgba(201, 169, 97, 0.4);
+      border-color: rgba(201, 169, 97, 0.6);
+      transform: translateY(-2px) scale(1.05);
+      color: #1a1410;
+    }
+
+    .complete-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+
+    .complete-counter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #6b5843;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== SECTION CARDS MODE ===== */
+    .section-cards-view {
+      display: none;
+    }
+
+    .section-cards-view.active {
+      display: block;
     }
 
     /* Paragraph Section */
@@ -515,7 +665,7 @@
       cursor: not-allowed;
     }
 
-    /* VIEW MODE TOGGLE - COMPACT WITH GOLD HOVER */
+    /* VIEW MODE TOGGLE - COMPACT (REMOVED DEFAULT) */
     .view-mode-toggle-mini {
       display: flex;
       gap: 0.2rem;
@@ -613,6 +763,15 @@
 
     /* Mobile */
     @media (max-width: 768px) {
+      .mode-toggle-btn {
+        font-size: 0.65rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .mode-icon {
+        font-size: 0.85rem;
+      }
+
       .paragraph-nav-container {
         gap: 0.25rem;
         left: 0.25rem;
@@ -642,6 +801,12 @@
     }
 
     @media (max-width: 480px) {
+      .mode-toggle-btn {
+        font-size: 0.6rem;
+        padding: 0.45rem 0.85rem;
+        gap: 0.35rem;
+      }
+
       .paragraph-nav-container {
         gap: 0.2rem;
       }
@@ -676,16 +841,28 @@
       </div>
     </header>
 
+    <!-- READING MODE TOGGLE -->
+    <div class="reading-mode-toggle">
+      <div class="mode-toggle-container">
+        <button class="mode-toggle-btn active" onclick="setReadingMode('complete')">
+          <span class="mode-icon">📖</span>
+          <span>Complete Text</span>
+        </button>
+        <button class="mode-toggle-btn" onclick="setReadingMode('cards')">
+          <span class="mode-icon">🎴</span>
+          <span>Section Cards</span>
+        </button>
+      </div>
+    </div>
+
     <div class="essay-container" id="essayContainer">
-      <div style="text-align: center; padding: 4rem;">
-        <div style="font-weight: 600;">Loading...</div>
+      <div id="loadingSpinner" style="text-align: center; padding: 4rem; opacity: 1; transition: opacity 0.3s;">
+        <div style="font-weight: 600; color: #6b5843;">Loading content...</div>
+        <div style="margin-top: 1rem; font-size: 0.875rem; color: #9a9186;">Please wait</div>
       </div>
 
-      <div class="nav-pills">
-        <button class="pill-btn" data-type="essays" onclick="loadWritingType('essays')">Essays</button>
-        <button class="pill-btn" data-type="reports" onclick="loadWritingType('reports')">Reports</button>
-        <button class="pill-btn" data-type="reviews" onclick="loadWritingType('reviews')">Reviews</button>
-        <button class="pill-btn" data-type="emails" onclick="loadWritingType('emails')">Emails</button>
+      <div id="mainContent" style="opacity: 0; transition: opacity 0.3s;">
+        <!-- Content will be inserted here -->
       </div>
     </div>
 
@@ -698,6 +875,8 @@
     let paragraphIndices = [];
     let viewModes = [];
     let swipeIndices = {};
+    let readingMode = 'complete'; // 'complete' or 'cards'
+    let completeTextIndex = 0; // Track which complete essay is showing
 
     const DATA_PATHS = {
       essays: 'data/essays-models.json',
@@ -733,63 +912,84 @@
       essays: 'for_and_against',
       reports: 'formal_report',
       reviews: 'product_review',
-      emails: 'informal_email'  // Will be determined dynamically based on email type
+      emails: 'informal_email'
     };
 
-    const SECTION_MAP = {
-      // Essays
-      'Introduction': 'introduction_context',
-      'INTRODUCTION': 'introduction_context',
-      'Thesis': 'thesis_statement',
-      'Body Paragraph 1 - Advantage': 'advantages',
-      'Body Paragraph 2 - Advantage': 'advantages',
-      'Body Paragraph 3 - Disadvantage': 'disadvantages',
-      'Conclusion': 'conclusion',
-      'CONCLUSION': 'conclusion',
+const SECTION_MAP = {
+  // Essays
+  'Thesis': 'thesis_statement',
+  'Body Paragraph 1 - Advantage': 'advantages',
+  'Body Paragraph 2 - Advantage': 'advantages',
+  'Body Paragraph 3 - Disadvantage': 'disadvantages',
+  'Conclusion': 'conclusion',
+  'CONCLUSION': 'conclusion',
+  
+  // Reports
+  'Introduction - Purpose': 'introduction_purpose',
+  'Introduction - Basis': 'introduction_basis',
+  'General View': 'general_view',
+  'GENERAL VIEW': 'general_view',
+  'Praising': 'praising',
+  'PRAISING': 'praising',
+  'Criticising': 'criticising',
+  'CRITICISING': 'criticising',
+  'Criticizing': 'criticising',
+  'CRITICIZING': 'criticising',
+  'Recommendation': 'recommendation',
+  'RECOMMENDATION': 'recommendation',
+  'Recommendations': 'recommendation',
+  'RECOMMENDATIONS': 'recommendation',
+  
+  // Reviews
+  'Introduction - Opening': 'introduction_opening',
+  'Introduction - Background': 'introduction_background',
+  'Reputation': 'introduction_background',
+  'REPUTATION': 'introduction_background',
+  'Features': 'features',
+  'FEATURES': 'features',
+  'Features - Paragraph 1': 'features',
+  'Features - Paragraph 2': 'features',
+  
+  // Emails - ADD ALL VARIATIONS
+  'Opening': 'opening',
+  'OPENING': 'opening',
+  'Opening - Informal': 'opening',
+  'Opening - Formal': 'opening',
+  'OPENING - INFORMAL': 'opening',
+  'OPENING - FORMAL': 'opening',
+  'Body': 'body',
+  'BODY': 'body',
+  'Body - Informal': 'body',
+  'Body - Formal': 'body',
+  'BODY - INFORMAL': 'body',
+  'BODY - FORMAL': 'body',
+  'Main Content': 'body',
+  'MAIN CONTENT': 'body',
+  'Main content': 'body',
+  'Closing': 'closing',
+  'CLOSING': 'closing',
+  'Closing - Informal': 'closing',
+  'Closing - Formal': 'closing',
+  'CLOSING - INFORMAL': 'closing',
+  'CLOSING - FORMAL': 'closing'
+};
+
+    function setReadingMode(mode) {
+      readingMode = mode;
       
-      // Reports - comprehensive mappings
-      'Introduction - Purpose': 'introduction_purpose',
-      'Introduction - Basis': 'introduction_basis',
-      'INTRODUCTION': 'introduction_purpose',  // For reports using just "INTRODUCTION"
-      'General View': 'general_view',
-      'GENERAL VIEW': 'general_view',
-      'Praising': 'praising',
-      'PRAISING': 'praising',
-      'Criticising': 'criticising',
-      'CRITICISING': 'criticising',
-      'Criticizing': 'criticising',
-      'CRITICIZING': 'criticising',
-      'Recommendation': 'recommendation',
-      'RECOMMENDATION': 'recommendation',
-      'Recommendations': 'recommendation',
-      'RECOMMENDATIONS': 'recommendation',
+      // Update toggle buttons
+      document.querySelectorAll('.mode-toggle-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.closest('.mode-toggle-btn').classList.add('active');
       
-      // Reviews
-      'Introduction - Opening': 'introduction_opening',
-      'Introduction - Background': 'introduction_background',
-      'Reputation': 'introduction_background',
-      'REPUTATION': 'introduction_background',
-      'Features': 'features',
-      'FEATURES': 'features',
-      
-      // Emails
-      'Opening': 'opening_informal',
-      'OPENING': 'opening_informal',
-      'Opening - Informal': 'opening_informal',
-      'Opening - Formal': 'opening_formal',
-      'Body': 'body_informal',
-      'BODY': 'body_informal',
-      'Body - Informal': 'body_informal',
-      'Body - Formal': 'body_formal',
-      'Closing': 'closing_informal',
-      'CLOSING': 'closing_informal',
-      'Closing - Informal': 'closing_informal',
-      'Closing - Formal': 'closing_formal'
-    };
+      renderWriting();
+    }
 
     async function loadWritingType(type) {
       console.log(`📚 Loading ${type}...`);
       currentType = type;
+      completeTextIndex = 0; // Reset to first essay
 
       document.querySelectorAll('.pill-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -801,8 +1001,16 @@
       document.getElementById('brandSubtitle').textContent = 
         type.charAt(0).toUpperCase() + type.slice(1);
 
-      const container = document.getElementById('essayContainer');
-      container.innerHTML = '<div style="text-align: center; padding: 4rem;"><div style="font-weight: 600;">Loading...</div></div>';
+      // Show loading state
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (loadingSpinner && mainContent) {
+        loadingSpinner.style.opacity = '1';
+        loadingSpinner.style.display = 'block';
+        mainContent.style.opacity = '0';
+        mainContent.style.display = 'none';
+      }
 
       try {
         const modelsResponse = await fetch(DATA_PATHS[type]);
@@ -810,7 +1018,6 @@
         
         currentData = await modelsResponse.json();
 
-        // Load phrase banks for essays, reports, reviews, and emails
         if ((type === 'essays' || type === 'reports' || type === 'reviews' || type === 'emails') && PHRASE_PATHS[type]) {
           const [hookRes, thesisRes, fullRes] = await Promise.all([
             fetch(PHRASE_PATHS[type].hook),
@@ -837,22 +1044,109 @@
 
       } catch (error) {
         console.error(`❌ Error:`, error);
-        container.innerHTML = `<div style="text-align: center; padding: 4rem; color: #ef4444;">Failed to load ${type}</div>`;
+        const mainContent = document.getElementById('mainContent');
+        if (mainContent) {
+          mainContent.innerHTML = `<div style="text-align: center; padding: 4rem; color: #ef4444;">Failed to load ${type}</div>`;
+          mainContent.style.display = 'block';
+          mainContent.style.opacity = '1';
+        }
+        if (loadingSpinner) {
+          loadingSpinner.style.display = 'none';
+        }
       }
     }
 
     function renderWriting() {
-      const container = document.getElementById('essayContainer');
+      const mainContent = document.getElementById('mainContent');
+      const loadingSpinner = document.getElementById('loadingSpinner');
       
       if (!currentData || !currentData.samples) return;
 
-      const firstSample = currentData.samples[0];
       let html = '';
       
       if (currentData.title) {
         html += `<div class="essay-title">${currentData.title}</div>`;
       }
 
+      // COMPLETE TEXT MODE
+      if (readingMode === 'complete') {
+        html += renderCompleteTextView();
+      } 
+      // SECTION CARDS MODE
+      else {
+        html += renderSectionCardsView();
+      }
+
+      // Bottom navigation pills
+      html += `
+        <div class="nav-pills">
+          <button class="pill-btn ${currentType === 'essays' ? 'active' : ''}" onclick="loadWritingType('essays')">Essays</button>
+          <button class="pill-btn ${currentType === 'reports' ? 'active' : ''}" onclick="loadWritingType('reports')">Reports</button>
+          <button class="pill-btn ${currentType === 'reviews' ? 'active' : ''}" onclick="loadWritingType('reviews')">Reviews</button>
+          <button class="pill-btn ${currentType === 'emails' ? 'active' : ''}" onclick="loadWritingType('emails')">Emails</button>
+        </div>
+      `;
+
+      mainContent.innerHTML = html;
+      
+      // Smooth transition
+      setTimeout(() => {
+        if (loadingSpinner) {
+          loadingSpinner.style.opacity = '0';
+          setTimeout(() => {
+            loadingSpinner.style.display = 'none';
+          }, 300);
+        }
+        mainContent.style.display = 'block';
+        setTimeout(() => {
+          mainContent.style.opacity = '1';
+        }, 50);
+      }, 100);
+    }
+
+    function renderCompleteTextView() {
+      const sample = currentData.samples[completeTextIndex];
+      const totalSamples = currentData.samples.length;
+      
+      let html = '<div class="complete-text-view active">';
+      
+      sample.paragraphs.forEach((para) => {
+        html += `
+          <div class="complete-paragraph">
+            ${para.label ? `<div class="complete-section-label">${para.label}</div>` : ''}
+            <div class="complete-paragraph-text">
+              ${highlightFirstWords(para.text)}
+            </div>
+          </div>
+        `;
+      });
+      
+      html += `
+        <div class="complete-nav">
+          <button class="complete-nav-btn" onclick="navigateCompleteText(-1)"
+                  ${completeTextIndex === 0 ? 'disabled' : ''}>
+            ← Previous ${currentType.slice(0, -1)}
+          </button>
+          
+          <div class="complete-counter">
+            ${currentType.charAt(0).toUpperCase() + currentType.slice(1, -1)} ${completeTextIndex + 1} of ${totalSamples}
+          </div>
+          
+          <button class="complete-nav-btn" onclick="navigateCompleteText(1)"
+                  ${completeTextIndex === totalSamples - 1 ? 'disabled' : ''}>
+            Next ${currentType.slice(0, -1)} →
+          </button>
+        </div>
+      `;
+      
+      html += '</div>';
+      return html;
+    }
+
+    function renderSectionCardsView() {
+      const firstSample = currentData.samples[0];
+      let html = '<div class="section-cards-view active">';
+      
       firstSample.paragraphs.forEach((para, paraIndex) => {
         const currentSampleIndex = paragraphIndices[paraIndex];
         const currentPara = currentData.samples[currentSampleIndex].paragraphs[paraIndex];
@@ -884,48 +1178,48 @@
           </div>
         `;
       });
+      
+      html += '</div>';
+      return html;
+    }
 
-      html += `
-        <div class="nav-pills">
-          <button class="pill-btn ${currentType === 'essays' ? 'active' : ''}" onclick="loadWritingType('essays')">Essays</button>
-          <button class="pill-btn ${currentType === 'reports' ? 'active' : ''}" onclick="loadWritingType('reports')">Reports</button>
-          <button class="pill-btn ${currentType === 'reviews' ? 'active' : ''}" onclick="loadWritingType('reviews')">Reviews</button>
-          <button class="pill-btn ${currentType === 'emails' ? 'active' : ''}" onclick="loadWritingType('emails')">Emails</button>
-        </div>
-      `;
-
-      container.innerHTML = html;
+    function navigateCompleteText(direction) {
+      const totalSamples = currentData.samples.length;
+      const newIndex = completeTextIndex + direction;
+      
+      if (newIndex >= 0 && newIndex < totalSamples) {
+        completeTextIndex = newIndex;
+        renderWriting();
+      }
     }
 
     function renderViewModeToggle(paraIndex, label) {
       if (!label) return '';
       
-      // Special handling for introduction-related sections
       const labelLower = label.toLowerCase();
       const isIntroductionRelated = labelLower.includes('introduction') || 
                                      labelLower.includes('reputation') ||
                                      labelLower.includes('background');
       
-      // Special handling for email sections
-      const isEmailSection = labelLower.includes('opening') ||
+      // Enhanced email section detection
+      const isEmailSection = currentType === 'emails' && (
+                             labelLower.includes('opening') ||
                              labelLower.includes('body') ||
+                             labelLower.includes('main') ||
+                             labelLower.includes('content') ||
                              labelLower.includes('closing') ||
                              labelLower.includes('greeting') ||
-                             labelLower.includes('sign off');
+                             labelLower.includes('sign'));
       
-      // Check if we have phrase data for this section
       let hasPhrases = false;
       
       if ((isIntroductionRelated || isEmailSection) && phraseData && (phraseData.hook || phraseData.thesis || phraseData.full)) {
-        // Introduction-related and email sections always have phrase support when phrase data exists
         hasPhrases = true;
       } else {
-        // For other sections, check getPhraseSection
         hasPhrases = phraseData && getPhraseSection(label);
       }
       
       if (!hasPhrases) {
-        console.log('❌ No phrases found for:', label);
         return '';
       }
 
@@ -933,12 +1227,10 @@
 
       return `
         <div class="view-mode-toggle-mini">
-          <button class="view-mode-btn ${currentMode === 'text' ? 'active' : ''}" 
-                  onclick="setViewMode(${paraIndex}, 'text')">Default</button>
           <button class="view-mode-btn ${currentMode === 'list' ? 'active' : ''}" 
-                  onclick="setViewMode(${paraIndex}, 'list')">List</button>
+                  onclick="setViewMode(${paraIndex}, 'list')">LIST</button>
           <button class="view-mode-btn ${currentMode === 'swipe' ? 'active' : ''}" 
-                  onclick="setViewMode(${paraIndex}, 'swipe')">Slide</button>
+                  onclick="setViewMode(${paraIndex}, 'swipe')">SLIDE</button>
         </div>
       `;
     }
@@ -947,18 +1239,14 @@
       const phraseSection = getPhraseSection(label);
       if (!phraseSection) return '';
 
-      // Check if this should be paired introduction display
       const isIntroduction = label && (label.toLowerCase().includes('introduction') || label === 'Introduction');
       const isPairedSection = isIntroduction || 
                               (currentType === 'reviews' && label && label.toLowerCase().includes('reputation'));
       
       let html = `<div class="phrase-list-view ${viewMode === 'list' ? 'active' : ''}">
-        <!-- Close Button -->
         <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
       `;
 
-      // For introduction with hook + thesis structure (essays, reports, reviews)
-      // OR for reputation section in reviews (which uses background phrases)
       if (isPairedSection && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
         const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
@@ -978,14 +1266,12 @@
           const hookPhrases = hookSection.phrases;
           const thesisPhrases = thesisSection.phrases;
           
-          // Icons for each variant
           const icons = {
             default: '📌',
             alt1: '👍',
             alt2: '⭐'
           };
           
-          // Create paired cards showing hook + thesis together
           Object.keys(hookPhrases).forEach((groupKey, index) => {
             const groupLabel = groupKey === 'default' ? 'Complete Introduction Examples' : 
                               groupKey === 'alt1' ? 'Alternative Examples 1' : 
@@ -1030,10 +1316,7 @@
         }
       }
       
-      // Regular sections (non-introduction or fallback)
       const phrases = phraseSection.phrases;
-      
-      // Icons for each variant
       const icons = {
         default: '📌',
         alt1: '👍',
@@ -1069,12 +1352,10 @@
     }
 
     function renderSwipeView(paraIndex, label, viewMode) {
-      // Check if this is introduction and we have separate hook/thesis data
       const isIntroduction = label && (label.toLowerCase().includes('introduction') || label === 'Introduction');
       
       let allSlides = [];
       
-      // For introduction with hook + thesis structure (essays, reports, reviews)
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
         const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
@@ -1094,7 +1375,6 @@
           const hookPhrases = hookSection.phrases;
           const thesisPhrases = thesisSection.phrases;
           
-          // Create paired slides (hook + thesis together)
           Object.keys(hookPhrases).forEach(groupKey => {
             const hooks = hookPhrases[groupKey];
             const theses = thesisPhrases[groupKey];
@@ -1113,7 +1393,6 @@
         }
       }
       
-      // If no introduction-specific slides, fall back to regular phrase section
       if (allSlides.length === 0) {
         const phraseSection = getPhraseSection(label);
         if (!phraseSection) return '';
@@ -1132,7 +1411,6 @@
 
       let html = `
         <div class="swipe-view ${viewMode === 'swipe' ? 'active' : ''}">
-          <!-- Close Button -->
           <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
           
           <div class="swipe-slides-container">
@@ -1140,7 +1418,6 @@
               let slideContent = '';
               
               if (slide.type === 'paired') {
-                // Hook + Thesis paired slide
                 const combinedText = slide.hook + ' ' + slide.thesis;
                 const wordCount = combinedText.replace(/\[([^\]]+)\]/g, '$1').split(/\s+/).length;
                 const sizeClass = wordCount <= 15 ? 'size-medium' :
@@ -1157,7 +1434,6 @@
                   </div>
                 `;
               } else {
-                // Single phrase slide
                 const wordCount = slide.text.replace(/\[([^\]]+)\]/g, '$1').split(/\s+/).length;
                 const sizeClass = wordCount <= 10 ? 'size-small' :
                                  wordCount <= 20 ? 'size-medium' :
@@ -1198,30 +1474,33 @@
     }
 
     function getPhraseSection(paragraphLabel) {
-      console.log('🔍 getPhraseSection:', paragraphLabel);
-      if (!phraseData) return null;
+      if (!phraseData) {
+        console.log('❌ No phraseData available');
+        return null;
+      }
 
       const essayType = ESSAY_TYPE_MAP[currentType];
-      if (!essayType) return null;
+      if (!essayType) {
+        console.log('❌ No essay type found for:', currentType);
+        return null;
+      }
+
+      console.log('🔍 Looking for phrases:', { currentType, essayType, paragraphLabel });
 
       // Try exact match first
       let sectionKey = SECTION_MAP[paragraphLabel];
       
-      // If no exact match, try case-insensitive and partial matches
+      // If no exact match, try case-insensitive and pattern matching
       if (!sectionKey) {
         const labelLower = paragraphLabel?.toLowerCase() || '';
         
-        // Reports
         if (currentType === 'reports') {
-          // Check for introduction variations
           if (labelLower.includes('introduction')) {
             sectionKey = 'introduction_purpose';
           }
-          // Check for general view/overview
           else if (labelLower.includes('general') || labelLower.includes('overview')) {
             sectionKey = 'general_view';
           }
-          // Check for positive aspects (praising)
           else if (labelLower.includes('prais') || 
                    labelLower.includes('positive') || 
                    labelLower.includes('strength') || 
@@ -1230,7 +1509,6 @@
                    labelLower.includes('improvement')) {
             sectionKey = 'praising';
           }
-          // Check for negative aspects (criticising)
           else if (labelLower.includes('critic') || 
                    labelLower.includes('concern') || 
                    labelLower.includes('negative') ||
@@ -1239,53 +1517,45 @@
                    labelLower.includes('challenge')) {
             sectionKey = 'criticising';
           }
-          // Check for recommendations
           else if (labelLower.includes('recommend')) {
             sectionKey = 'recommendation';
           }
-          // Check for conclusion
           else if (labelLower.includes('conclusion')) {
             sectionKey = 'conclusion';
           }
         }
-        
-        // Reviews
-        if (currentType === 'reviews') {
-          // Check for introduction variations
+        else if (currentType === 'reviews') {
           if (labelLower.includes('introduction')) {
             sectionKey = 'introduction_opening';
           }
-          // Check for reputation (background/context about the item)
           else if (labelLower.includes('reputation') || 
                    labelLower.includes('background') ||
                    labelLower.includes('known for') ||
                    labelLower.includes('famous')) {
             sectionKey = 'introduction_background';
           }
-          // Check for features
           else if (labelLower.includes('feature')) {
             sectionKey = 'features';
           }
-          // Check for recommendation
           else if (labelLower.includes('recommend')) {
             sectionKey = 'recommendation';
           }
         }
-        
-        // Emails
-        if (currentType === 'emails') {
-          // Check for opening
+        else if (currentType === 'emails') {
+          // Email section detection - simplified
           if (labelLower.includes('opening') || labelLower.includes('greeting')) {
-            // Determine if formal or informal based on label
-            sectionKey = labelLower.includes('formal') ? 'opening_formal' : 'opening_informal';
+            sectionKey = 'opening';
+            console.log('📧 Detected opening section:', sectionKey);
           }
-          // Check for body
-          else if (labelLower.includes('body') || labelLower.includes('main')) {
-            sectionKey = labelLower.includes('formal') ? 'body_formal' : 'body_informal';
+          else if (labelLower.includes('body') || 
+                   labelLower.includes('main') ||
+                   labelLower.includes('content')) {
+            sectionKey = 'body';
+            console.log('📧 Detected body section:', sectionKey);
           }
-          // Check for closing
-          else if (labelLower.includes('closing') || labelLower.includes('sign off')) {
-            sectionKey = labelLower.includes('formal') ? 'closing_formal' : 'closing_informal';
+          else if (labelLower.includes('closing') || labelLower.includes('sign')) {
+            sectionKey = 'closing';
+            console.log('📧 Detected closing section:', sectionKey);
           }
         }
       }
@@ -1295,9 +1565,12 @@
         return null;
       }
 
+      console.log('✅ Section key found:', sectionKey);
+
+      // Determine which source data to use AND lookup type
       let sourceData = null;
-      
-      // For essays
+      let lookupType = essayType;
+
       if (currentType === 'essays') {
         if (sectionKey === 'introduction_context') {
           sourceData = phraseData.hook || phraseData.full;
@@ -1307,9 +1580,7 @@
           sourceData = phraseData.full;
         }
       }
-      
-      // For reports
-      if (currentType === 'reports') {
+      else if (currentType === 'reports') {
         if (sectionKey === 'introduction_purpose') {
           sourceData = phraseData.hook || phraseData.full;
         } else if (sectionKey === 'introduction_basis') {
@@ -1318,9 +1589,7 @@
           sourceData = phraseData.full;
         }
       }
-      
-      // For reviews
-      if (currentType === 'reviews') {
+      else if (currentType === 'reviews') {
         if (sectionKey === 'introduction_opening') {
           sourceData = phraseData.hook || phraseData.full;
         } else if (sectionKey === 'introduction_background') {
@@ -1329,48 +1598,57 @@
           sourceData = phraseData.full;
         }
       }
-      
-      // For emails
-      if (currentType === 'emails') {
-        // Determine if this is formal or informal email based on sectionKey
-        const isFormal = sectionKey && sectionKey.includes('formal');
-        const emailType = isFormal ? 'formal_email' : 'informal_email';
+      else if (currentType === 'emails') {
+        // CRITICAL FIX: Determine lookupType based on paragraph label (not sectionKey)
+        const labelLower = paragraphLabel?.toLowerCase() || '';
+        const isFormal = labelLower.includes('formal');
+        lookupType = isFormal ? 'formal_email' : 'informal_email';
+        console.log('📧 Email lookup type determined:', lookupType, 'from label:', paragraphLabel);
         
-        // Override the essay type for emails dynamically
-        const structure = sourceData ? null : (
-          sectionKey && (sectionKey.includes('opening') || sectionKey === 'opening_informal' || sectionKey === 'opening_formal') ? 
-            phraseData.hook :
-          sectionKey && (sectionKey.includes('body') || sectionKey === 'body_informal' || sectionKey === 'body_formal') ?
-            phraseData.thesis :
-          sectionKey && (sectionKey.includes('closing') || sectionKey === 'closing_informal' || sectionKey === 'closing_formal') ?
-            phraseData.full :
-          null
-        );
-        
-        if (structure) {
-          sourceData = structure;
+        if (sectionKey === 'opening') {
+          sourceData = phraseData.hook;
+          console.log('📧 Using hook data for opening');
+        } else if (sectionKey === 'body') {
+          sourceData = phraseData.thesis;
+          console.log('📧 Using thesis data for body');
+        } else if (sectionKey === 'closing') {
+          sourceData = phraseData.full;
+          console.log('📧 Using full data for closing');
         }
       }
 
       if (!sourceData) {
-        console.log('❌ No source data found');
+        console.log('❌ No source data found for section key:', sectionKey);
+        console.log('Available phraseData keys:', Object.keys(phraseData));
         return null;
       }
       
-      // Get the appropriate essay type (for emails, determine formal vs informal from sectionKey)
-      let lookupType = essayType;
-      if (currentType === 'emails' && sectionKey) {
-        lookupType = sectionKey.includes('formal') ? 'formal_email' : 'informal_email';
+      console.log('📦 Source data available:', Object.keys(sourceData));
+      console.log('🔑 Looking up type:', lookupType);
+      
+      if (!sourceData.structures) {
+        console.log('❌ No structures in source data');
+        return null;
       }
       
       const structure = sourceData.structures[lookupType];
       if (!structure) {
         console.log('❌ No structure found for type:', lookupType);
+        console.log('Available structures:', Object.keys(sourceData.structures || {}));
         return null;
       }
 
+      console.log('📋 Structure sections available:', Object.keys(structure.sections || {}));
+
       const section = structure.sections[sectionKey];
-      console.log('✅ Found section:', sectionKey, section ? 'YES' : 'NO');
+      
+      if (!section) {
+        console.log('❌ No section found for key:', sectionKey);
+        console.log('Available sections:', Object.keys(structure.sections || {}));
+      } else {
+        console.log('✅ Section found with', Object.keys(section.phrases || {}).length, 'phrase groups');
+      }
+      
       return section;
     }
 
@@ -1382,16 +1660,27 @@
       return phrase.replace(/\[([^\]]+)\]/g, '<span class="highlight">$1</span>');
     }
 
-    function setViewMode(paraIndex, mode) {
-      viewModes[paraIndex] = mode;
-      if (mode === 'swipe') {
-        const swipeKey = `para_${paraIndex}`;
-        if (swipeIndices[swipeKey] === undefined) {
-          swipeIndices[swipeKey] = 0;
-        }
-      }
-      renderWriting();
+   function setViewMode(paraIndex, mode) {
+  // SAFETY CHECK: Don't change mode if no phrases available
+  if (mode !== 'text') {
+    const label = currentData.samples[0].paragraphs[paraIndex].label;
+    const phraseSection = getPhraseSection(label);
+    
+    if (!phraseSection) {
+      console.warn('⚠️ No phrases available for:', label);
+      return; // Don't change mode - keep text visible
     }
+  }
+  
+  viewModes[paraIndex] = mode;
+  if (mode === 'swipe') {
+    const swipeKey = `para_${paraIndex}`;
+    if (swipeIndices[swipeKey] === undefined) {
+      swipeIndices[swipeKey] = 0;
+    }
+  }
+  renderWriting();
+}
 
     function navigateSwipe(paraIndex, direction) {
       const swipeKey = `para_${paraIndex}`;
@@ -1402,7 +1691,6 @@
       
       let totalSlides = 0;
       
-      // Count slides based on introduction or regular paragraph
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
         const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
