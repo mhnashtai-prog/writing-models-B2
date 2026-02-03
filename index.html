@@ -721,13 +721,19 @@
         hook: 'data/review-intro-opening.json',
         thesis: 'data/review-intro-background.json',
         full: 'data/review-full-structures.json'
+      },
+      emails: {
+        hook: 'data/email-opening.json',
+        thesis: 'data/email-body.json',
+        full: 'data/email-closing.json'
       }
     };
 
     const ESSAY_TYPE_MAP = {
       essays: 'for_and_against',
       reports: 'formal_report',
-      reviews: 'product_review'
+      reviews: 'product_review',
+      emails: 'informal_email'  // Will be determined dynamically based on email type
     };
 
     const SECTION_MAP = {
@@ -764,7 +770,21 @@
       'Reputation': 'introduction_background',
       'REPUTATION': 'introduction_background',
       'Features': 'features',
-      'FEATURES': 'features'
+      'FEATURES': 'features',
+      
+      // Emails
+      'Opening': 'opening_informal',
+      'OPENING': 'opening_informal',
+      'Opening - Informal': 'opening_informal',
+      'Opening - Formal': 'opening_formal',
+      'Body': 'body_informal',
+      'BODY': 'body_informal',
+      'Body - Informal': 'body_informal',
+      'Body - Formal': 'body_formal',
+      'Closing': 'closing_informal',
+      'CLOSING': 'closing_informal',
+      'Closing - Informal': 'closing_informal',
+      'Closing - Formal': 'closing_formal'
     };
 
     async function loadWritingType(type) {
@@ -790,8 +810,8 @@
         
         currentData = await modelsResponse.json();
 
-        // Load phrase banks for essays, reports, and reviews
-        if ((type === 'essays' || type === 'reports' || type === 'reviews') && PHRASE_PATHS[type]) {
+        // Load phrase banks for essays, reports, reviews, and emails
+        if ((type === 'essays' || type === 'reports' || type === 'reviews' || type === 'emails') && PHRASE_PATHS[type]) {
           const [hookRes, thesisRes, fullRes] = await Promise.all([
             fetch(PHRASE_PATHS[type].hook),
             fetch(PHRASE_PATHS[type].thesis),
@@ -886,11 +906,18 @@
                                      labelLower.includes('reputation') ||
                                      labelLower.includes('background');
       
+      // Special handling for email sections
+      const isEmailSection = labelLower.includes('opening') ||
+                             labelLower.includes('body') ||
+                             labelLower.includes('closing') ||
+                             labelLower.includes('greeting') ||
+                             labelLower.includes('sign off');
+      
       // Check if we have phrase data for this section
       let hasPhrases = false;
       
-      if (isIntroductionRelated && phraseData && (phraseData.hook || phraseData.thesis || phraseData.full)) {
-        // Introduction-related sections always have phrase support when phrase data exists
+      if ((isIntroductionRelated || isEmailSection) && phraseData && (phraseData.hook || phraseData.thesis || phraseData.full)) {
+        // Introduction-related and email sections always have phrase support when phrase data exists
         hasPhrases = true;
       } else {
         // For other sections, check getPhraseSection
@@ -1244,6 +1271,23 @@
             sectionKey = 'recommendation';
           }
         }
+        
+        // Emails
+        if (currentType === 'emails') {
+          // Check for opening
+          if (labelLower.includes('opening') || labelLower.includes('greeting')) {
+            // Determine if formal or informal based on label
+            sectionKey = labelLower.includes('formal') ? 'opening_formal' : 'opening_informal';
+          }
+          // Check for body
+          else if (labelLower.includes('body') || labelLower.includes('main')) {
+            sectionKey = labelLower.includes('formal') ? 'body_formal' : 'body_informal';
+          }
+          // Check for closing
+          else if (labelLower.includes('closing') || labelLower.includes('sign off')) {
+            sectionKey = labelLower.includes('formal') ? 'closing_formal' : 'closing_informal';
+          }
+        }
       }
       
       if (!sectionKey) {
@@ -1285,15 +1329,43 @@
           sourceData = phraseData.full;
         }
       }
+      
+      // For emails
+      if (currentType === 'emails') {
+        // Determine if this is formal or informal email based on sectionKey
+        const isFormal = sectionKey && sectionKey.includes('formal');
+        const emailType = isFormal ? 'formal_email' : 'informal_email';
+        
+        // Override the essay type for emails dynamically
+        const structure = sourceData ? null : (
+          sectionKey && (sectionKey.includes('opening') || sectionKey === 'opening_informal' || sectionKey === 'opening_formal') ? 
+            phraseData.hook :
+          sectionKey && (sectionKey.includes('body') || sectionKey === 'body_informal' || sectionKey === 'body_formal') ?
+            phraseData.thesis :
+          sectionKey && (sectionKey.includes('closing') || sectionKey === 'closing_informal' || sectionKey === 'closing_formal') ?
+            phraseData.full :
+          null
+        );
+        
+        if (structure) {
+          sourceData = structure;
+        }
+      }
 
       if (!sourceData) {
         console.log('❌ No source data found');
         return null;
       }
       
-      const structure = sourceData.structures[essayType];
+      // Get the appropriate essay type (for emails, determine formal vs informal from sectionKey)
+      let lookupType = essayType;
+      if (currentType === 'emails' && sectionKey) {
+        lookupType = sectionKey.includes('formal') ? 'formal_email' : 'informal_email';
+      }
+      
+      const structure = sourceData.structures[lookupType];
       if (!structure) {
-        console.log('❌ No structure found for essay type:', essayType);
+        console.log('❌ No structure found for type:', lookupType);
         return null;
       }
 
