@@ -951,27 +951,27 @@ const SECTION_MAP = {
   'Features - Paragraph 2': 'features',
   
   // Emails - ADD ALL VARIATIONS
-  'Opening': 'opening_informal',
-  'OPENING': 'opening_informal',
-  'Opening - Informal': 'opening_informal',
-  'Opening - Formal': 'opening_formal',
-  'OPENING - INFORMAL': 'opening_informal',
-  'OPENING - FORMAL': 'opening_formal',
-  'Body': 'body_informal',
-  'BODY': 'body_informal',
-  'Body - Informal': 'body_informal',
-  'Body - Formal': 'body_formal',
-  'BODY - INFORMAL': 'body_informal',
-  'BODY - FORMAL': 'body_formal',
-  'Main Content': 'body_informal',
-  'MAIN CONTENT': 'body_informal',
-  'Main content': 'body_informal',
-  'Closing': 'closing_informal',
-  'CLOSING': 'closing_informal',
-  'Closing - Informal': 'closing_informal',
-  'Closing - Formal': 'closing_formal',
-  'CLOSING - INFORMAL': 'closing_informal',
-  'CLOSING - FORMAL': 'closing_formal'
+  'Opening': 'opening',
+  'OPENING': 'opening',
+  'Opening - Informal': 'opening',
+  'Opening - Formal': 'opening',
+  'OPENING - INFORMAL': 'opening',
+  'OPENING - FORMAL': 'opening',
+  'Body': 'body',
+  'BODY': 'body',
+  'Body - Informal': 'body',
+  'Body - Formal': 'body',
+  'BODY - INFORMAL': 'body',
+  'BODY - FORMAL': 'body',
+  'Main Content': 'body',
+  'MAIN CONTENT': 'body',
+  'Main content': 'body',
+  'Closing': 'closing',
+  'CLOSING': 'closing',
+  'Closing - Informal': 'closing',
+  'Closing - Formal': 'closing',
+  'CLOSING - INFORMAL': 'closing',
+  'CLOSING - FORMAL': 'closing'
 };
 
     function setReadingMode(mode) {
@@ -1542,21 +1542,19 @@ const SECTION_MAP = {
           }
         }
         else if (currentType === 'emails') {
-          // Email section detection - check for formal/informal
-          const isFormal = labelLower.includes('formal');
-          
+          // Email section detection - simplified
           if (labelLower.includes('opening') || labelLower.includes('greeting')) {
-            sectionKey = isFormal ? 'opening_formal' : 'opening_informal';
+            sectionKey = 'opening';
             console.log('📧 Detected opening section:', sectionKey);
           }
           else if (labelLower.includes('body') || 
                    labelLower.includes('main') ||
                    labelLower.includes('content')) {
-            sectionKey = isFormal ? 'body_formal' : 'body_informal';
+            sectionKey = 'body';
             console.log('📧 Detected body section:', sectionKey);
           }
           else if (labelLower.includes('closing') || labelLower.includes('sign')) {
-            sectionKey = isFormal ? 'closing_formal' : 'closing_informal';
+            sectionKey = 'closing';
             console.log('📧 Detected closing section:', sectionKey);
           }
         }
@@ -1569,8 +1567,9 @@ const SECTION_MAP = {
 
       console.log('✅ Section key found:', sectionKey);
 
-      // Determine which source data to use
+      // Determine which source data to use AND lookup type
       let sourceData = null;
+      let lookupType = essayType;
 
       if (currentType === 'essays') {
         if (sectionKey === 'introduction_context') {
@@ -1600,13 +1599,19 @@ const SECTION_MAP = {
         }
       }
       else if (currentType === 'emails') {
-        if (sectionKey && sectionKey.includes('opening')) {
+        // CRITICAL FIX: Determine lookupType based on paragraph label (not sectionKey)
+        const labelLower = paragraphLabel?.toLowerCase() || '';
+        const isFormal = labelLower.includes('formal');
+        lookupType = isFormal ? 'formal_email' : 'informal_email';
+        console.log('📧 Email lookup type determined:', lookupType, 'from label:', paragraphLabel);
+        
+        if (sectionKey === 'opening') {
           sourceData = phraseData.hook;
           console.log('📧 Using hook data for opening');
-        } else if (sectionKey && sectionKey.includes('body')) {
+        } else if (sectionKey === 'body') {
           sourceData = phraseData.thesis;
           console.log('📧 Using thesis data for body');
-        } else if (sectionKey && sectionKey.includes('closing')) {
+        } else if (sectionKey === 'closing') {
           sourceData = phraseData.full;
           console.log('📧 Using full data for closing');
         }
@@ -1619,13 +1624,6 @@ const SECTION_MAP = {
       }
       
       console.log('📦 Source data available:', Object.keys(sourceData));
-      
-      // Determine lookup type
-      let lookupType = essayType;
-      if (currentType === 'emails' && sectionKey) {
-        lookupType = sectionKey.includes('formal') ? 'formal_email' : 'informal_email';
-      }
-      
       console.log('🔑 Looking up type:', lookupType);
       
       if (!sourceData.structures) {
