@@ -1551,22 +1551,23 @@ else if (currentType === 'reviews') {
 }
 
 // Emails - ADD "else" HERE
-else if (currentType === 'emails') {   // ✅ ADD "else" HERE
-    if (labelLower.includes('opening') || labelLower.includes('greeting')) {
-      sectionKey = labelLower.includes('formal') ? 'opening_formal' : 'opening_informal';
-    }
-    else if (labelLower.includes('body') || 
-             labelLower.includes('main') ||
-             labelLower.includes('content')) {
-      sectionKey = labelLower.includes('formal') ? 'body_formal' : 'body_informal';
-    }
-    else if (labelLower.includes('closing') || labelLower.includes('sign off')) {
-      sectionKey = labelLower.includes('formal') ? 'closing_formal' : 'closing_informal';
-    }
-  }
-}
+    const structure = sourceData ? null : (
+          sectionKey && (sectionKey.includes('opening') || sectionKey === 'opening_informal' || sectionKey === 'opening_formal') ? 
+            phraseData.hook :
+          sectionKey && (sectionKey.includes('body') || sectionKey === 'body_informal' || sectionKey === 'body_formal') ?
+            phraseData.thesis :
+          sectionKey && (sectionKey.includes('closing') || sectionKey === 'closing_informal' || sectionKey === 'closing_formal') ?
+            phraseData.full :
+          null
+        );
+        
+        if (structure) {
+          sourceData = structure;
+        }
+      }
 
       if (!sourceData) {
+        console.log('❌ No source data found');
         return null;
       }
       
