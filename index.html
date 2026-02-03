@@ -1591,16 +1591,27 @@ const SECTION_MAP = {
       return phrase.replace(/\[([^\]]+)\]/g, '<span class="highlight">$1</span>');
     }
 
-    function setViewMode(paraIndex, mode) {
-      viewModes[paraIndex] = mode;
-      if (mode === 'swipe') {
-        const swipeKey = `para_${paraIndex}`;
-        if (swipeIndices[swipeKey] === undefined) {
-          swipeIndices[swipeKey] = 0;
-        }
-      }
-      renderWriting();
+   function setViewMode(paraIndex, mode) {
+  // SAFETY CHECK: Don't change mode if no phrases available
+  if (mode !== 'text') {
+    const label = currentData.samples[0].paragraphs[paraIndex].label;
+    const phraseSection = getPhraseSection(label);
+    
+    if (!phraseSection) {
+      console.warn('⚠️ No phrases available for:', label);
+      return; // Don't change mode - keep text visible
     }
+  }
+  
+  viewModes[paraIndex] = mode;
+  if (mode === 'swipe') {
+    const swipeKey = `para_${paraIndex}`;
+    if (swipeIndices[swipeKey] === undefined) {
+      swipeIndices[swipeKey] = 0;
+    }
+  }
+  renderWriting();
+}
 
     function navigateSwipe(paraIndex, direction) {
       const swipeKey = `para_${paraIndex}`;
