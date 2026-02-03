@@ -954,6 +954,9 @@
       'BODY': 'body_informal',
       'Body - Informal': 'body_informal',
       'Body - Formal': 'body_formal',
+      'Main Content': 'body_informal',
+      'MAIN CONTENT': 'body_informal',
+      'Main content': 'body_informal',
       'Closing': 'closing_informal',
       'CLOSING': 'closing_informal',
       'Closing - Informal': 'closing_informal',
@@ -1070,7 +1073,7 @@
           <div class="complete-paragraph">
             ${para.label ? `<div class="complete-section-label">${para.label}</div>` : ''}
             <div class="complete-paragraph-text">
-              ${para.text}
+              ${highlightFirstWords(para.text)}
             </div>
           </div>
         `;
@@ -1158,6 +1161,8 @@
       
       const isEmailSection = labelLower.includes('opening') ||
                              labelLower.includes('body') ||
+                             labelLower.includes('main') ||
+                             labelLower.includes('content') ||
                              labelLower.includes('closing') ||
                              labelLower.includes('greeting') ||
                              labelLower.includes('sign off');
@@ -1176,7 +1181,6 @@
 
       const currentMode = viewModes[paraIndex];
 
-      // REMOVED "DEFAULT" BUTTON - Only LIST and SLIDE remain
       return `
         <div class="view-mode-toggle-mini">
           <button class="view-mode-btn ${currentMode === 'list' ? 'active' : ''}" 
@@ -1489,7 +1493,9 @@
           if (labelLower.includes('opening') || labelLower.includes('greeting')) {
             sectionKey = labelLower.includes('formal') ? 'opening_formal' : 'opening_informal';
           }
-          else if (labelLower.includes('body') || labelLower.includes('main')) {
+          else if (labelLower.includes('body') || 
+                   labelLower.includes('main') ||
+                   labelLower.includes('content')) {
             sectionKey = labelLower.includes('formal') ? 'body_formal' : 'body_informal';
           }
           else if (labelLower.includes('closing') || labelLower.includes('sign off')) {
@@ -1536,7 +1542,6 @@
       
       if (currentType === 'emails') {
         const isFormal = sectionKey && sectionKey.includes('formal');
-        const emailType = isFormal ? 'formal_email' : 'informal_email';
         
         const structure = sourceData ? null : (
           sectionKey && (sectionKey.includes('opening') || sectionKey === 'opening_informal' || sectionKey === 'opening_formal') ? 
