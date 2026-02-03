@@ -711,21 +711,36 @@
         hook: 'data/essay-hook.json',
         thesis: 'data/essay-thesis.json',
         full: 'data/essay-full-structures.json'
+      },
+      reports: {
+        hook: 'data/report-intro-purpose.json',
+        thesis: 'data/report-intro-basis.json',
+        full: 'data/report-full-structures.json'
       }
     };
 
     const ESSAY_TYPE_MAP = {
-      essays: 'for_and_against'
+      essays: 'for_and_against',
+      reports: 'formal_report'
     };
 
     const SECTION_MAP = {
+      // Essays
       'Introduction': 'introduction_context',
       'INTRODUCTION': 'introduction_context',
       'Thesis': 'thesis_statement',
       'Body Paragraph 1 - Advantage': 'advantages',
       'Body Paragraph 2 - Advantage': 'advantages',
       'Body Paragraph 3 - Disadvantage': 'disadvantages',
-      'Conclusion': 'conclusion'
+      'Conclusion': 'conclusion',
+      
+      // Reports
+      'Introduction - Purpose': 'introduction_purpose',
+      'Introduction - Basis': 'introduction_basis',
+      'General View': 'general_view',
+      'Praising': 'praising',
+      'Criticising': 'criticising',
+      'Recommendation': 'recommendation'
     };
 
     async function loadWritingType(type) {
@@ -751,8 +766,8 @@
         
         currentData = await modelsResponse.json();
 
-        // Load phrase banks for essays
-        if (type === 'essays' && PHRASE_PATHS[type]) {
+        // Load phrase banks for essays and reports
+        if ((type === 'essays' || type === 'reports') && PHRASE_PATHS[type]) {
           const [hookRes, thesisRes, fullRes] = await Promise.all([
             fetch(PHRASE_PATHS[type].hook),
             fetch(PHRASE_PATHS[type].thesis),
@@ -870,8 +885,9 @@
 
       // For introduction with hook + thesis structure
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
-        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
-        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        const essayType = ESSAY_TYPE_MAP[currentType];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[currentType === 'essays' ? 'thesis_statement' : 'introduction_basis'];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
@@ -975,8 +991,9 @@
       
       // For introduction with hook + thesis structure
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
-        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
-        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        const essayType = ESSAY_TYPE_MAP[currentType];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[currentType === 'essays' ? 'thesis_statement' : 'introduction_basis'];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
@@ -1096,12 +1113,27 @@
       if (!sectionKey) return null;
 
       let sourceData = null;
-      if (sectionKey === 'introduction_context') {
-        sourceData = phraseData.hook || phraseData.full;
-      } else if (sectionKey === 'thesis_statement') {
-        sourceData = phraseData.thesis || phraseData.full;
-      } else {
-        sourceData = phraseData.full;
+      
+      // For essays
+      if (currentType === 'essays') {
+        if (sectionKey === 'introduction_context') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'thesis_statement') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      
+      // For reports
+      if (currentType === 'reports') {
+        if (sectionKey === 'introduction_purpose') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'introduction_basis') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
       }
 
       if (!sourceData) return null;
@@ -1141,8 +1173,9 @@
       
       // Count slides based on introduction or regular paragraph
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
-        const hookSection = phraseData.hook.structures[ESSAY_TYPE_MAP[currentType]]?.sections['introduction_context'];
-        const thesisSection = phraseData.thesis.structures[ESSAY_TYPE_MAP[currentType]]?.sections['thesis_statement'];
+        const essayType = ESSAY_TYPE_MAP[currentType];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[currentType === 'essays' ? 'thesis_statement' : 'introduction_basis'];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
