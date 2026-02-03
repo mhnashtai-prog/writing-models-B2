@@ -917,51 +917,58 @@
       emails: 'informal_email'
     };
 
-    const SECTION_MAP = {
-      'Introduction': 'introduction_context',
-      'INTRODUCTION': 'introduction_context',
-      'Thesis': 'thesis_statement',
-      'Body Paragraph 1 - Advantage': 'advantages',
-      'Body Paragraph 2 - Advantage': 'advantages',
-      'Body Paragraph 3 - Disadvantage': 'disadvantages',
-      'Conclusion': 'conclusion',
-      'CONCLUSION': 'conclusion',
-      'Introduction - Purpose': 'introduction_purpose',
-      'Introduction - Basis': 'introduction_basis',
-      'General View': 'general_view',
-      'GENERAL VIEW': 'general_view',
-      'Praising': 'praising',
-      'PRAISING': 'praising',
-      'Criticising': 'criticising',
-      'CRITICISING': 'criticising',
-      'Criticizing': 'criticising',
-      'CRITICIZING': 'criticising',
-      'Recommendation': 'recommendation',
-      'RECOMMENDATION': 'recommendation',
-      'Recommendations': 'recommendation',
-      'RECOMMENDATIONS': 'recommendation',
-      'Introduction - Opening': 'introduction_opening',
-      'Introduction - Background': 'introduction_background',
-      'Reputation': 'introduction_background',
-      'REPUTATION': 'introduction_background',
-      'Features': 'features',
-      'FEATURES': 'features',
-      'Opening': 'opening_informal',
-      'OPENING': 'opening_informal',
-      'Opening - Informal': 'opening_informal',
-      'Opening - Formal': 'opening_formal',
-      'Body': 'body_informal',
-      'BODY': 'body_informal',
-      'Body - Informal': 'body_informal',
-      'Body - Formal': 'body_formal',
-      'Main Content': 'body_informal',
-      'MAIN CONTENT': 'body_informal',
-      'Main content': 'body_informal',
-      'Closing': 'closing_informal',
-      'CLOSING': 'closing_informal',
-      'Closing - Informal': 'closing_informal',
-      'Closing - Formal': 'closing_formal'
-    };
+const SECTION_MAP = {
+  // Essays
+  'Thesis': 'thesis_statement',
+  'Body Paragraph 1 - Advantage': 'advantages',
+  'Body Paragraph 2 - Advantage': 'advantages',
+  'Body Paragraph 3 - Disadvantage': 'disadvantages',
+  'Conclusion': 'conclusion',
+  'CONCLUSION': 'conclusion',
+  
+  // Reports
+  'Introduction - Purpose': 'introduction_purpose',
+  'Introduction - Basis': 'introduction_basis',
+  'General View': 'general_view',
+  'GENERAL VIEW': 'general_view',
+  'Praising': 'praising',
+  'PRAISING': 'praising',
+  'Criticising': 'criticising',
+  'CRITICISING': 'criticising',
+  'Criticizing': 'criticising',
+  'CRITICIZING': 'criticising',
+  'Recommendation': 'recommendation',
+  'RECOMMENDATION': 'recommendation',
+  'Recommendations': 'recommendation',
+  'RECOMMENDATIONS': 'recommendation',
+  
+  // Reviews
+  'Introduction - Opening': 'introduction_opening',
+  'Introduction - Background': 'introduction_background',
+  'Reputation': 'introduction_background',
+  'REPUTATION': 'introduction_background',
+  'Features': 'features',
+  'FEATURES': 'features',
+  'Features - Paragraph 1': 'features',
+  'Features - Paragraph 2': 'features',
+  
+  // Emails
+  'Opening': 'opening_informal',
+  'OPENING': 'opening_informal',
+  'Opening - Informal': 'opening_informal',
+  'Opening - Formal': 'opening_formal',
+  'Body': 'body_informal',
+  'BODY': 'body_informal',
+  'Body - Informal': 'body_informal',
+  'Body - Formal': 'body_formal',
+  'Main Content': 'body_informal',
+  'MAIN CONTENT': 'body_informal',
+  'Main content': 'body_informal',
+  'Closing': 'closing_informal',
+  'CLOSING': 'closing_informal',
+  'Closing - Informal': 'closing_informal',
+  'Closing - Formal': 'closing_formal'
+};
 
     function setReadingMode(mode) {
       readingMode = mode;
