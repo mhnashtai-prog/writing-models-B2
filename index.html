@@ -716,12 +716,18 @@
         hook: 'data/report-intro-purpose.json',
         thesis: 'data/report-intro-basis.json',
         full: 'data/report-full-structures.json'
+      },
+      reviews: {
+        hook: 'data/review-intro-opening.json',
+        thesis: 'data/review-intro-background.json',
+        full: 'data/review-full-structures.json'
       }
     };
 
     const ESSAY_TYPE_MAP = {
       essays: 'for_and_against',
-      reports: 'formal_report'
+      reports: 'formal_report',
+      reviews: 'product_review'
     };
 
     const SECTION_MAP = {
@@ -739,7 +745,6 @@
       'Introduction - Purpose': 'introduction_purpose',
       'Introduction - Basis': 'introduction_basis',
       'INTRODUCTION': 'introduction_purpose',  // For reports using just "INTRODUCTION"
-      'Introduction': 'introduction_purpose',   // For reports using just "Introduction"
       'General View': 'general_view',
       'GENERAL VIEW': 'general_view',
       'Praising': 'praising',
@@ -751,7 +756,13 @@
       'Recommendation': 'recommendation',
       'RECOMMENDATION': 'recommendation',
       'Recommendations': 'recommendation',
-      'RECOMMENDATIONS': 'recommendation'
+      'RECOMMENDATIONS': 'recommendation',
+      
+      // Reviews
+      'Introduction - Opening': 'introduction_opening',
+      'Introduction - Background': 'introduction_background',
+      'Features': 'features',
+      'FEATURES': 'features'
     };
 
     async function loadWritingType(type) {
@@ -777,8 +788,8 @@
         
         currentData = await modelsResponse.json();
 
-        // Load phrase banks for essays and reports
-        if ((type === 'essays' || type === 'reports') && PHRASE_PATHS[type]) {
+        // Load phrase banks for essays, reports, and reviews
+        if ((type === 'essays' || type === 'reports' || type === 'reviews') && PHRASE_PATHS[type]) {
           const [hookRes, thesisRes, fullRes] = await Promise.all([
             fetch(PHRASE_PATHS[type].hook),
             fetch(PHRASE_PATHS[type].thesis),
@@ -894,11 +905,21 @@
         <button class="modal-close-btn" onclick="setViewMode(${paraIndex}, 'text')" title="Close">×</button>
       `;
 
-      // For introduction with hook + thesis structure
+      // For introduction with hook + thesis structure (essays, reports, reviews)
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
         const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
-        const thesisSection = phraseData.thesis.structures[essayType]?.sections[currentType === 'essays' ? 'thesis_statement' : 'introduction_basis'];
+        
+        let thesisSectionKey;
+        if (currentType === 'essays') {
+          thesisSectionKey = 'thesis_statement';
+        } else if (currentType === 'reports') {
+          thesisSectionKey = 'introduction_basis';
+        } else if (currentType === 'reviews') {
+          thesisSectionKey = 'introduction_background';
+        }
+        
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[thesisSectionKey];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
@@ -1000,11 +1021,21 @@
       
       let allSlides = [];
       
-      // For introduction with hook + thesis structure
+      // For introduction with hook + thesis structure (essays, reports, reviews)
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
         const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
-        const thesisSection = phraseData.thesis.structures[essayType]?.sections[currentType === 'essays' ? 'thesis_statement' : 'introduction_basis'];
+        
+        let thesisSectionKey;
+        if (currentType === 'essays') {
+          thesisSectionKey = 'thesis_statement';
+        } else if (currentType === 'reports') {
+          thesisSectionKey = 'introduction_basis';
+        } else if (currentType === 'reviews') {
+          thesisSectionKey = 'introduction_background';
+        }
+        
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[thesisSectionKey];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
@@ -1123,43 +1154,62 @@
       // Try exact match first
       let sectionKey = SECTION_MAP[paragraphLabel];
       
-      // If no exact match, try case-insensitive and partial matches for reports
-      if (!sectionKey && currentType === 'reports') {
+      // If no exact match, try case-insensitive and partial matches
+      if (!sectionKey) {
         const labelLower = paragraphLabel?.toLowerCase() || '';
         
-        // Check for introduction variations
-        if (labelLower.includes('introduction')) {
-          sectionKey = 'introduction_purpose';
+        // Reports
+        if (currentType === 'reports') {
+          // Check for introduction variations
+          if (labelLower.includes('introduction')) {
+            sectionKey = 'introduction_purpose';
+          }
+          // Check for general view/overview
+          else if (labelLower.includes('general') || labelLower.includes('overview')) {
+            sectionKey = 'general_view';
+          }
+          // Check for positive aspects (praising)
+          else if (labelLower.includes('prais') || 
+                   labelLower.includes('positive') || 
+                   labelLower.includes('strength') || 
+                   labelLower.includes('popular') ||
+                   labelLower.includes('achievement') ||
+                   labelLower.includes('improvement')) {
+            sectionKey = 'praising';
+          }
+          // Check for negative aspects (criticising)
+          else if (labelLower.includes('critic') || 
+                   labelLower.includes('concern') || 
+                   labelLower.includes('negative') ||
+                   labelLower.includes('problem') ||
+                   labelLower.includes('issue') ||
+                   labelLower.includes('challenge')) {
+            sectionKey = 'criticising';
+          }
+          // Check for recommendations
+          else if (labelLower.includes('recommend')) {
+            sectionKey = 'recommendation';
+          }
+          // Check for conclusion
+          else if (labelLower.includes('conclusion')) {
+            sectionKey = 'conclusion';
+          }
         }
-        // Check for general view/overview
-        else if (labelLower.includes('general') || labelLower.includes('overview')) {
-          sectionKey = 'general_view';
-        }
-        // Check for positive aspects (praising)
-        else if (labelLower.includes('prais') || 
-                 labelLower.includes('positive') || 
-                 labelLower.includes('strength') || 
-                 labelLower.includes('popular') ||
-                 labelLower.includes('achievement') ||
-                 labelLower.includes('improvement')) {
-          sectionKey = 'praising';
-        }
-        // Check for negative aspects (criticising)
-        else if (labelLower.includes('critic') || 
-                 labelLower.includes('concern') || 
-                 labelLower.includes('negative') ||
-                 labelLower.includes('problem') ||
-                 labelLower.includes('issue') ||
-                 labelLower.includes('challenge')) {
-          sectionKey = 'criticising';
-        }
-        // Check for recommendations
-        else if (labelLower.includes('recommend')) {
-          sectionKey = 'recommendation';
-        }
-        // Check for conclusion
-        else if (labelLower.includes('conclusion')) {
-          sectionKey = 'conclusion';
+        
+        // Reviews
+        if (currentType === 'reviews') {
+          // Check for introduction variations
+          if (labelLower.includes('introduction')) {
+            sectionKey = 'introduction_opening';
+          }
+          // Check for features
+          else if (labelLower.includes('feature')) {
+            sectionKey = 'features';
+          }
+          // Check for recommendation
+          else if (labelLower.includes('recommend')) {
+            sectionKey = 'recommendation';
+          }
         }
       }
       
@@ -1186,6 +1236,17 @@
         if (sectionKey === 'introduction_purpose') {
           sourceData = phraseData.hook || phraseData.full;
         } else if (sectionKey === 'introduction_basis') {
+          sourceData = phraseData.thesis || phraseData.full;
+        } else {
+          sourceData = phraseData.full;
+        }
+      }
+      
+      // For reviews
+      if (currentType === 'reviews') {
+        if (sectionKey === 'introduction_opening') {
+          sourceData = phraseData.hook || phraseData.full;
+        } else if (sectionKey === 'introduction_background') {
           sourceData = phraseData.thesis || phraseData.full;
         } else {
           sourceData = phraseData.full;
@@ -1240,7 +1301,17 @@
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
         const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
-        const thesisSection = phraseData.thesis.structures[essayType]?.sections[currentType === 'essays' ? 'thesis_statement' : 'introduction_basis'];
+        
+        let thesisSectionKey;
+        if (currentType === 'essays') {
+          thesisSectionKey = 'thesis_statement';
+        } else if (currentType === 'reports') {
+          thesisSectionKey = 'introduction_basis';
+        } else if (currentType === 'reviews') {
+          thesisSectionKey = 'introduction_background';
+        }
+        
+        const thesisSection = phraseData.thesis.structures[essayType]?.sections[thesisSectionKey];
         
         if (hookSection && thesisSection) {
           const hookPhrases = hookSection.phrases;
