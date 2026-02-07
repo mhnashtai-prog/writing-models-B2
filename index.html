@@ -1190,16 +1190,11 @@ const SECTION_MAP = {
       
       const labelLower = label.toLowerCase();
       
-      // FIX #1: Check for disadvantage sections
+      // Check if this section should potentially have phrases
       const isDisadvantageSection = labelLower.includes('disadvantage') || 
                                      labelLower.includes('counterargument') ||
                                      labelLower.includes('counter-argument') ||
                                      labelLower.includes('additional point');
-      
-      // FIX #2: Check for essay introduction
-      const isEssayIntroduction = currentType === 'essays' && 
-                                  (labelLower === 'introduction' || 
-                                   labelLower.includes('introduction'));
       
       const isIntroductionRelated = labelLower.includes('introduction') || 
                                      labelLower.includes('reputation') ||
@@ -1214,15 +1209,9 @@ const SECTION_MAP = {
                              labelLower.includes('greeting') ||
                              labelLower.includes('sign'));
       
-      let hasPhrases = false;
-      
-      // FIX #1 & #2: Always check for phrase section availability
-      if (isIntroductionRelated || isEmailSection || isDisadvantageSection || isEssayIntroduction) {
-        const phraseSection = getPhraseSection(label);
-        hasPhrases = phraseSection !== null;
-      } else {
-        hasPhrases = phraseData && getPhraseSection(label);
-      }
+      // Always check if phrases actually exist
+      const phraseSection = getPhraseSection(label);
+      const hasPhrases = phraseSection !== null;
       
       if (!hasPhrases) {
         return '';
