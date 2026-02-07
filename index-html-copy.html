@@ -950,28 +950,16 @@ const SECTION_MAP = {
   'Features - Paragraph 1': 'features',
   'Features - Paragraph 2': 'features',
   
-  // Emails - ADD ALL VARIATIONS
-  'Opening': 'opening',
+  // Emails - KEEP THE _informal/_formal SUFFIXES - they match the JSON!
+  'Opening': 'opening',  // Will be resolved to opening_informal or opening_formal
   'OPENING': 'opening',
-  'Opening - Informal': 'opening',
-  'Opening - Formal': 'opening',
-  'OPENING - INFORMAL': 'opening',
-  'OPENING - FORMAL': 'opening',
-  'Body': 'body',
+  'Body': 'body',  // Will be resolved to body_informal or body_formal
   'BODY': 'body',
-  'Body - Informal': 'body',
-  'Body - Formal': 'body',
-  'BODY - INFORMAL': 'body',
-  'BODY - FORMAL': 'body',
-  'Main Content': 'body',
+  'Main Content': 'body',  // THIS IS KEY - maps to body
   'MAIN CONTENT': 'body',
   'Main content': 'body',
-  'Closing': 'closing',
-  'CLOSING': 'closing',
-  'Closing - Informal': 'closing',
-  'Closing - Formal': 'closing',
-  'CLOSING - INFORMAL': 'closing',
-  'CLOSING - FORMAL': 'closing'
+  'Closing': 'closing',  // Will be resolved to closing_informal or closing_formal
+  'CLOSING': 'closing'
 };
 
     function setReadingMode(mode) {
@@ -1640,10 +1628,69 @@ const SECTION_MAP = {
 
       console.log('📋 Structure sections available:', Object.keys(structure.sections || {}));
 
-      const section = structure.sections[sectionKey];
+      // For emails, we need to add the _informal or _formal suffix
+      let finalSectionKey = sectionKey;
+      if (currentType === 'emails') {
+        const labelLower = paragraphLabel?.toLowerCase() || '';
+        const isFormal = labelLower.includes('formal');
+        const suffix = isFormal ? '_formal' : '_informal';
+        
+        // Add suffix to the base key (opening, body, closing)
+        finalSectionKey = sectionKey + suffix;
+        console.log(`📧 Email section key with suffix: ${sectionKey} → ${finalSectionKey}`);
+      }
+
+      let section = structure.sections[finalSectionKey];
+      
+      // FALLBACK: If exact key not found, try to find a matching section
+      if (!section && currentType === 'emails') {
+        const availableSections = Object.keys(structure.sections || {});
+        console.log('🔍 Exact key not found, searching available sections:', availableSections);
+        
+        // Try pattern matching for email sections
+        if (sectionKey === 'opening') {
+          // Look for any key containing "opening" or "greet"
+          const match = availableSections.find(k => 
+            k.toLowerCase().includes('opening') || 
+            k.toLowerCase().includes('greet')
+          );
+          if (match) {
+            console.log('✅ Found matching section:', match);
+            section = structure.sections[match];
+          }
+        } else if (sectionKey === 'body') {
+          // Look for any key containing "body" or "main" or "content"
+          const match = availableSections.find(k => 
+            k.toLowerCase().includes('body') || 
+            k.toLowerCase().includes('main') ||
+            k.toLowerCase().includes('content')
+          );
+          if (match) {
+            console.log('✅ Found matching section:', match);
+            section = structure.sections[match];
+          }
+        } else if (sectionKey === 'closing') {
+          // Look for any key containing "closing" or "sign"
+          const match = availableSections.find(k => 
+            k.toLowerCase().includes('closing') || 
+            k.toLowerCase().includes('sign') ||
+            k.toLowerCase().includes('end')
+          );
+          if (match) {
+            console.log('✅ Found matching section:', match);
+            section = structure.sections[match];
+          }
+        }
+        
+        // If still no match, try the first available section as last resort
+        if (!section && availableSections.length > 0) {
+          console.log('⚠️ Using first available section as fallback:', availableSections[0]);
+          section = structure.sections[availableSections[0]];
+        }
+      }
       
       if (!section) {
-        console.log('❌ No section found for key:', sectionKey);
+        console.log('❌ No section found for key:', finalSectionKey);
         console.log('Available sections:', Object.keys(structure.sections || {}));
       } else {
         console.log('✅ Section found with', Object.keys(section.phrases || {}).length, 'phrase groups');
