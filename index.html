@@ -915,60 +915,69 @@
       emails: 'informal_email'
     };
 
-const SECTION_MAP = {
-  // Essays
-  'Introduction': 'introduction_context',
-  'INTRODUCTION': 'introduction_context',
-  'Thesis': 'thesis_statement',
-  'THESIS': 'thesis_statement',
-  'Body Paragraph 1 - Advantage': 'advantages',
-  'Body Paragraph 2 - Advantage': 'advantages',
-  'Body Paragraph 3 - Disadvantage': 'disadvantages',
-  'Body Paragraph 3 - Counterargument/Additional Point': 'disadvantages',
-  'Conclusion': 'conclusion',
-  'CONCLUSION': 'conclusion',
+// Context-aware section mapping function
+function getSectionKey(label, contentType) {
+  const labelKey = label || '';
   
-  // Reports
-  'Introduction': 'introduction_purpose',
-  'INTRODUCTION': 'introduction_purpose',
-  'Introduction - Purpose': 'introduction_purpose',
-  'Introduction - Basis': 'introduction_basis',
-  'General View': 'general_view',
-  'GENERAL VIEW': 'general_view',
-  'Praising': 'praising',
-  'PRAISING': 'praising',
-  'Criticising': 'criticising',
-  'CRITICISING': 'criticising',
-  'Criticizing': 'criticising',
-  'CRITICIZING': 'criticising',
-  'Recommendation': 'recommendation',
-  'RECOMMENDATION': 'recommendation',
-  'Recommendations': 'recommendation',
-  'RECOMMENDATIONS': 'recommendation',
+  // Type-specific mappings for "Introduction"
+  if (labelKey === 'Introduction' || labelKey === 'INTRODUCTION') {
+    if (contentType === 'essays') return 'introduction_context';
+    if (contentType === 'reports') return 'introduction_purpose';
+    if (contentType === 'reviews') return 'introduction_opening';
+  }
   
-  // Reviews
-  'Introduction': 'introduction_opening',
-  'INTRODUCTION': 'introduction_opening',
-  'Introduction - Opening': 'introduction_opening',
-  'Introduction - Background': 'introduction_background',
-  'Reputation': 'introduction_background',
-  'REPUTATION': 'introduction_background',
-  'Features': 'features',
-  'FEATURES': 'features',
-  'Features - Paragraph 1': 'features',
-  'Features - Paragraph 2': 'features',
+  // Common mappings for all types
+  const commonMap = {
+    // Essays
+    'Thesis': 'thesis_statement',
+    'THESIS': 'thesis_statement',
+    'Body Paragraph 1 - Advantage': 'advantages',
+    'Body Paragraph 2 - Advantage': 'advantages',
+    'Body Paragraph 3 - Disadvantage': 'disadvantages',
+    'Body Paragraph 3 - Counterargument/Additional Point': 'disadvantages',
+    'Conclusion': 'conclusion',
+    'CONCLUSION': 'conclusion',
+    
+    // Reports
+    'Introduction - Purpose': 'introduction_purpose',
+    'Introduction - Basis': 'introduction_basis',
+    'General View': 'general_view',
+    'GENERAL VIEW': 'general_view',
+    'Praising': 'praising',
+    'PRAISING': 'praising',
+    'Criticising': 'criticising',
+    'CRITICISING': 'criticising',
+    'Criticizing': 'criticising',
+    'CRITICIZING': 'criticising',
+    'Recommendation': 'recommendation',
+    'RECOMMENDATION': 'recommendation',
+    'Recommendations': 'recommendation',
+    'RECOMMENDATIONS': 'recommendation',
+    
+    // Reviews
+    'Introduction - Opening': 'introduction_opening',
+    'Introduction - Background': 'introduction_background',
+    'Reputation': 'introduction_background',
+    'REPUTATION': 'introduction_background',
+    'Features': 'features',
+    'FEATURES': 'features',
+    'Features - Paragraph 1': 'features',
+    'Features - Paragraph 2': 'features',
+    
+    // Emails
+    'Opening': 'opening',
+    'OPENING': 'opening',
+    'Body': 'body',
+    'BODY': 'body',
+    'Main Content': 'body',
+    'MAIN CONTENT': 'body',
+    'Main content': 'body',
+    'Closing': 'closing',
+    'CLOSING': 'closing'
+  };
   
-  // Emails
-  'Opening': 'opening',
-  'OPENING': 'opening',
-  'Body': 'body',
-  'BODY': 'body',
-  'Main Content': 'body',
-  'MAIN CONTENT': 'body',
-  'Main content': 'body',
-  'Closing': 'closing',
-  'CLOSING': 'closing'
-};
+  return commonMap[labelKey];
+}
 
     function setReadingMode(mode) {
       readingMode = mode;
@@ -1247,7 +1256,7 @@ const SECTION_MAP = {
 
       if (isPairedSection && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
-        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[getSectionKey(label, currentType) || 'introduction_context'];
         
         let thesisSectionKey;
         if (currentType === 'essays') {
@@ -1356,7 +1365,7 @@ const SECTION_MAP = {
       
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
-        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[getSectionKey(label, currentType) || 'introduction_context'];
         
         let thesisSectionKey;
         if (currentType === 'essays') {
@@ -1485,8 +1494,8 @@ const SECTION_MAP = {
 
       console.log('🔍 Looking for phrases:', { currentType, essayType, paragraphLabel });
 
-      // Try exact match first
-      let sectionKey = SECTION_MAP[paragraphLabel];
+      // Try exact match first using the context-aware function
+      let sectionKey = getSectionKey(paragraphLabel, currentType);
       
       // If no exact match, try case-insensitive and pattern matching
       if (!sectionKey) {
@@ -1767,7 +1776,7 @@ const SECTION_MAP = {
       
       if (isIntroduction && phraseData && phraseData.hook && phraseData.thesis) {
         const essayType = ESSAY_TYPE_MAP[currentType];
-        const hookSection = phraseData.hook.structures[essayType]?.sections[SECTION_MAP[label] || 'introduction_context'];
+        const hookSection = phraseData.hook.structures[essayType]?.sections[getSectionKey(label, currentType) || 'introduction_context'];
         
         let thesisSectionKey;
         if (currentType === 'essays') {
