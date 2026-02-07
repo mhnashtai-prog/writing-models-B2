@@ -929,6 +929,8 @@ const SECTION_MAP = {
   'CONCLUSION': 'conclusion',
   
   // Reports
+  'Introduction': 'introduction_purpose',
+  'INTRODUCTION': 'introduction_purpose',
   'Introduction - Purpose': 'introduction_purpose',
   'Introduction - Basis': 'introduction_basis',
   'General View': 'general_view',
@@ -945,6 +947,8 @@ const SECTION_MAP = {
   'RECOMMENDATIONS': 'recommendation',
   
   // Reviews
+  'Introduction': 'introduction_opening',
+  'INTRODUCTION': 'introduction_opening',
   'Introduction - Opening': 'introduction_opening',
   'Introduction - Background': 'introduction_background',
   'Reputation': 'introduction_background',
@@ -1509,8 +1513,12 @@ const SECTION_MAP = {
           }
         }
         else if (currentType === 'reports') {
-          if (labelLower.includes('introduction')) {
+          if (labelLower.includes('introduction') && !labelLower.includes('basis')) {
             sectionKey = 'introduction_purpose';
+          }
+          else if (labelLower.includes('basis') || 
+                   (labelLower.includes('introduction') && labelLower.includes('basis'))) {
+            sectionKey = 'introduction_basis';
           }
           else if (labelLower.includes('general') || labelLower.includes('overview')) {
             sectionKey = 'general_view';
@@ -1539,11 +1547,12 @@ const SECTION_MAP = {
           }
         }
         else if (currentType === 'reviews') {
-          if (labelLower.includes('introduction')) {
+          if (labelLower.includes('introduction') && !labelLower.includes('background')) {
             sectionKey = 'introduction_opening';
           }
           else if (labelLower.includes('reputation') || 
                    labelLower.includes('background') ||
+                   (labelLower.includes('introduction') && labelLower.includes('background')) ||
                    labelLower.includes('known for') ||
                    labelLower.includes('famous')) {
             sectionKey = 'introduction_background';
