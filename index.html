@@ -917,10 +917,14 @@
 
 const SECTION_MAP = {
   // Essays
+  'Introduction': 'introduction_context',
+  'INTRODUCTION': 'introduction_context',
   'Thesis': 'thesis_statement',
+  'THESIS': 'thesis_statement',
   'Body Paragraph 1 - Advantage': 'advantages',
   'Body Paragraph 2 - Advantage': 'advantages',
   'Body Paragraph 3 - Disadvantage': 'disadvantages',
+  'Body Paragraph 3 - Counterargument/Additional Point': 'disadvantages',
   'Conclusion': 'conclusion',
   'CONCLUSION': 'conclusion',
   
@@ -950,15 +954,15 @@ const SECTION_MAP = {
   'Features - Paragraph 1': 'features',
   'Features - Paragraph 2': 'features',
   
-  // Emails - KEEP THE _informal/_formal SUFFIXES - they match the JSON!
-  'Opening': 'opening',  // Will be resolved to opening_informal or opening_formal
+  // Emails
+  'Opening': 'opening',
   'OPENING': 'opening',
-  'Body': 'body',  // Will be resolved to body_informal or body_formal
+  'Body': 'body',
   'BODY': 'body',
-  'Main Content': 'body',  // THIS IS KEY - maps to body
+  'Main Content': 'body',
   'MAIN CONTENT': 'body',
   'Main content': 'body',
-  'Closing': 'closing',  // Will be resolved to closing_informal or closing_formal
+  'Closing': 'closing',
   'CLOSING': 'closing'
 };
 
@@ -1185,11 +1189,22 @@ const SECTION_MAP = {
       if (!label) return '';
       
       const labelLower = label.toLowerCase();
+      
+      // FIX #1: Check for disadvantage sections
+      const isDisadvantageSection = labelLower.includes('disadvantage') || 
+                                     labelLower.includes('counterargument') ||
+                                     labelLower.includes('counter-argument') ||
+                                     labelLower.includes('additional point');
+      
+      // FIX #2: Check for essay introduction
+      const isEssayIntroduction = currentType === 'essays' && 
+                                  (labelLower === 'introduction' || 
+                                   labelLower.includes('introduction'));
+      
       const isIntroductionRelated = labelLower.includes('introduction') || 
                                      labelLower.includes('reputation') ||
                                      labelLower.includes('background');
       
-      // Enhanced email section detection
       const isEmailSection = currentType === 'emails' && (
                              labelLower.includes('opening') ||
                              labelLower.includes('body') ||
@@ -1201,8 +1216,10 @@ const SECTION_MAP = {
       
       let hasPhrases = false;
       
-      if ((isIntroductionRelated || isEmailSection) && phraseData && (phraseData.hook || phraseData.thesis || phraseData.full)) {
-        hasPhrases = true;
+      // FIX #1 & #2: Always check for phrase section availability
+      if (isIntroductionRelated || isEmailSection || isDisadvantageSection || isEssayIntroduction) {
+        const phraseSection = getPhraseSection(label);
+        hasPhrases = phraseSection !== null;
       } else {
         hasPhrases = phraseData && getPhraseSection(label);
       }
@@ -1482,7 +1499,27 @@ const SECTION_MAP = {
       if (!sectionKey) {
         const labelLower = paragraphLabel?.toLowerCase() || '';
         
-        if (currentType === 'reports') {
+        if (currentType === 'essays') {
+          if (labelLower.includes('introduction')) {
+            sectionKey = 'introduction_context';
+          }
+          else if (labelLower.includes('thesis')) {
+            sectionKey = 'thesis_statement';
+          }
+          else if (labelLower.includes('advantage') && !labelLower.includes('disadvantage')) {
+            sectionKey = 'advantages';
+          }
+          else if (labelLower.includes('disadvantage') || 
+                   labelLower.includes('counterargument') ||
+                   labelLower.includes('counter-argument') ||
+                   labelLower.includes('additional point')) {
+            sectionKey = 'disadvantages';
+          }
+          else if (labelLower.includes('conclusion')) {
+            sectionKey = 'conclusion';
+          }
+        }
+        else if (currentType === 'reports') {
           if (labelLower.includes('introduction')) {
             sectionKey = 'introduction_purpose';
           }
@@ -1530,7 +1567,6 @@ const SECTION_MAP = {
           }
         }
         else if (currentType === 'emails') {
-          // Email section detection - simplified
           if (labelLower.includes('opening') || labelLower.includes('greeting')) {
             sectionKey = 'opening';
             console.log('📧 Detected opening section:', sectionKey);
@@ -1587,7 +1623,6 @@ const SECTION_MAP = {
         }
       }
       else if (currentType === 'emails') {
-        // CRITICAL FIX: Determine lookupType based on paragraph label (not sectionKey)
         const labelLower = paragraphLabel?.toLowerCase() || '';
         const isFormal = labelLower.includes('formal');
         lookupType = isFormal ? 'formal_email' : 'informal_email';
@@ -1635,7 +1670,6 @@ const SECTION_MAP = {
         const isFormal = labelLower.includes('formal');
         const suffix = isFormal ? '_formal' : '_informal';
         
-        // Add suffix to the base key (opening, body, closing)
         finalSectionKey = sectionKey + suffix;
         console.log(`📧 Email section key with suffix: ${sectionKey} → ${finalSectionKey}`);
       }
@@ -1647,9 +1681,7 @@ const SECTION_MAP = {
         const availableSections = Object.keys(structure.sections || {});
         console.log('🔍 Exact key not found, searching available sections:', availableSections);
         
-        // Try pattern matching for email sections
         if (sectionKey === 'opening') {
-          // Look for any key containing "opening" or "greet"
           const match = availableSections.find(k => 
             k.toLowerCase().includes('opening') || 
             k.toLowerCase().includes('greet')
@@ -1659,7 +1691,6 @@ const SECTION_MAP = {
             section = structure.sections[match];
           }
         } else if (sectionKey === 'body') {
-          // Look for any key containing "body" or "main" or "content"
           const match = availableSections.find(k => 
             k.toLowerCase().includes('body') || 
             k.toLowerCase().includes('main') ||
@@ -1670,7 +1701,6 @@ const SECTION_MAP = {
             section = structure.sections[match];
           }
         } else if (sectionKey === 'closing') {
-          // Look for any key containing "closing" or "sign"
           const match = availableSections.find(k => 
             k.toLowerCase().includes('closing') || 
             k.toLowerCase().includes('sign') ||
@@ -1682,7 +1712,6 @@ const SECTION_MAP = {
           }
         }
         
-        // If still no match, try the first available section as last resort
         if (!section && availableSections.length > 0) {
           console.log('⚠️ Using first available section as fallback:', availableSections[0]);
           section = structure.sections[availableSections[0]];
